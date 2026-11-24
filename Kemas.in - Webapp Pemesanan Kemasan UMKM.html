@@ -1,0 +1,2841 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <title>Kemas.in - Jasa Custom Branding dan Kemasan UMKM</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            pagebg: '#F7FAF7',
+            cardbg: '#FFFFFF',
+            softgreen: '#E8F5EC',
+            forest: {
+              DEFAULT: '#14532D',
+              hover: '#0F3F22',
+              mid: '#166534',
+              bright: '#15803D',
+            },
+            ink: {
+              DEFAULT: '#112218',
+              muted: '#3E5647',
+            },
+            borderinput: '#648771',
+            borderlight: '#D3E4D8',
+            errortext: '#991B1B',
+            errorbg: '#FEF2F2',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Global base styles and fluid typography */
+    :root {
+      --bg-page: #F7FAF7;
+      --bg-card: #FFFFFF;
+      --bg-soft: #E8F5EC;
+      --forest-primary: #14532D;
+      --forest-hover: #0F3F22;
+      --forest-accent: #15803D;
+      --text-main: #112218;
+      --text-muted: #3E5647;
+      --border-input: #648771;
+      --border-subtle: #D3E4D8;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      font-size: clamp(14px, 1.1vw + 12px, 16px);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    h1 {
+      font-size: clamp(1.625rem, 2.8vw + 1rem, 2.5rem);
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+    }
+
+    .view-title {
+      font-size: clamp(1.375rem, 1.8vw + 0.9rem, 1.875rem);
+      line-height: 1.24;
+      letter-spacing: -0.02em;
+    }
+
+    /* Brand logo strict text-only styling */
+    .brand-logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: clamp(1.25rem, 1.2vw + 1rem, 1.5rem);
+      line-height: 1;
+      display: inline-flex;
+      align-items: baseline;
+    }
+
+    /* Interactive pointer rules */
+    button,
+    a,
+    label,
+    select,
+    summary,
+    [role="tab"],
+    input[type="checkbox"],
+    input[type="radio"],
+    input[type="color"] {
+      cursor: pointer;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"],
+    textarea {
+      cursor: text;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+    }
+
+    /* Accessible keyboard focus indicator */
+    :focus-visible {
+      outline: 2px solid #14532D;
+      outline-offset: 2px;
+    }
+
+    /* Form controls font inheritance and border contrast */
+    input, select, textarea, button {
+      font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    }
+
+    .form-field {
+      border: 1.5px solid #648771;
+      background-color: #FFFFFF;
+      color: #112218;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .form-field:focus {
+      border-color: #14532D;
+      box-shadow: 0 0 0 3px rgba(20, 83, 45, 0.14);
+      outline: none;
+    }
+
+    .form-field.field-error {
+      border-color: #991B1B;
+      background-color: #FEF2F2;
+    }
+
+    /* Product photo framing */
+    .product-photo {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+      background-color: #E8F5EC;
+    }
+
+    /* =====================================================================
+       MOTION SYSTEM (ENERGY 2 / RHYTHM 2 / MOTION 2)
+       Tiap gerakan punya tujuan:
+       - view-in: tanda pindah halaman (orientasi)
+       - reveal: konten muncul berurutan saat tergulir ke layar (perhatian)
+       - card-lift: kartu bisa diklik (affordance)
+       - float-*: ilustrasi hero hidup pelan, satu-satunya gerak berulang
+       - tombol jeda di header menghentikan semua gerak berulang
+       ===================================================================== */
+    @keyframes view-in {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .view-enter > * { animation: view-in 480ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+    .view-enter > *:nth-child(2) { animation-delay: 70ms; }
+    .view-enter > *:nth-child(3) { animation-delay: 140ms; }
+    .view-enter > *:nth-child(4) { animation-delay: 210ms; }
+    .view-enter > *:nth-child(n+5) { animation-delay: 280ms; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 560ms ease, transform 560ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      transition-delay: calc(var(--i, 0) * 90ms);
+    }
+    .reveal.is-visible { opacity: 1; transform: none; }
+
+    @keyframes float-y {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-9px) rotate(1.5deg); }
+    }
+    .svg-fb { transform-box: fill-box; transform-origin: center; }
+    .float-a { animation: float-y 6s ease-in-out infinite; }
+    .float-b { animation: float-y 7s ease-in-out -2s infinite; }
+    .float-c { animation: float-y 8s ease-in-out -1s infinite; }
+    .float-d { animation: float-y 5.5s ease-in-out -3s infinite; }
+
+    .card-lift {
+      transition: transform 240ms cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 240ms ease, border-color 240ms ease;
+    }
+    .card-lift:hover {
+      transform: translateY(-6px);
+      border-color: #648771;
+      box-shadow: 0 20px 34px -18px rgba(17, 34, 24, 0.34);
+    }
+    .card-lift .art-svg { transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+    .card-lift:hover .art-svg { transform: scale(1.06) rotate(-1.2deg); }
+
+    button, a { transition-property: color, background-color, border-color, transform, box-shadow; transition-duration: 180ms; }
+    button:not(:disabled):active, a[href]:active { transform: scale(0.97); }
+
+    /* Garis penghubung alur pemesanan tergambar saat blok terlihat */
+    .flow-step { position: relative; }
+    @media (min-width: 1024px) {
+      .flow-step:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 40px;
+        right: -12px;
+        height: 2px;
+        background: #B8D3C0;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 300ms;
+      }
+      .reveal.is-visible .flow-step:not(:last-child)::after { transform: scaleX(1); }
+    }
+
+    #toast-container:not(.hidden) > div { animation: toast-in 280ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+    @keyframes toast-in {
+      from { opacity: 0; transform: translateY(-10px) scale(0.97); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .header-scrolled { box-shadow: 0 8px 20px -14px rgba(17, 34, 24, 0.35); }
+
+    /* Jeda animasi dari tombol di header */
+    html[data-motion="paused"] .float-a,
+    html[data-motion="paused"] .float-b,
+    html[data-motion="paused"] .float-c,
+    html[data-motion="paused"] .float-d { animation-play-state: paused; }
+
+    /* Area aman layar berponi: konten tidak tertutup bar sistem */
+    :root { color-scheme: light; }
+    html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+    body { padding-top: env(safe-area-inset-top, 0px); }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0 0 auto;
+      height: env(safe-area-inset-top, 0px);
+      background: #FFFFFF;
+      z-index: 41;
+    }
+
+    /* Mobile bottom safe area */
+    .mobile-bottom-nav {
+      padding-bottom: max(0.375rem, env(safe-area-inset-bottom));
+    }
+
+    /* Custom color input styling */
+    input[type="color"] {
+      -webkit-appearance: none;
+      border: 1.5px solid #648771;
+      padding: 0;
+      background: #FFFFFF;
+    }
+    input[type="color"]::-webkit-color-swatch-wrapper {
+      padding: 3px;
+    }
+    input[type="color"]::-webkit-color-swatch {
+      border: none;
+      border-radius: 6px;
+    }
+
+    /* Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-pagebg text-ink antialiased min-h-screen flex flex-col">
+
+  <!-- =====================================================================
+       STICKY TOP HEADER (Compact 56-64px, Text-Only Logo)
+       ===================================================================== -->
+  <header class="sticky z-40 bg-white/95 backdrop-blur-sm border-b border-borderlight" style="top: env(safe-area-inset-top, 0px);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+      <!-- Pure Text Logo: Kemas.in (No icon, no box, no dot) -->
+      <button
+        type="button"
+        onclick="switchTab('katalog')"
+        class="min-h-[44px] px-1 flex items-center text-left rounded-md"
+        aria-label="Kemas.in, kembali ke Katalog"
+      >
+        <span class="brand-logo">
+          <span style="color: #14532D;">Kemas</span><span style="color: #15803D;">.in</span>
+        </span>
+      </button>
+
+      <!-- Desktop Navigation (>= 768px) -->
+      <nav class="hidden md:flex items-center gap-1" role="tablist" aria-label="Navigasi utama Kemas.in">
+        <button
+          type="button"
+          role="tab"
+          data-nav="katalog"
+          aria-controls="katalog"
+          aria-selected="true"
+          onclick="switchTab('katalog')"
+          class="desktop-nav-btn min-h-[44px] px-4 rounded-xl text-sm font-semibold transition-colors"
+        >
+          Katalog
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          data-nav="estimasi"
+          aria-controls="estimasi"
+          aria-selected="false"
+          onclick="switchTab('estimasi')"
+          class="desktop-nav-btn min-h-[44px] px-4 rounded-xl text-sm font-semibold transition-colors"
+        >
+          Estimasi
+        </button>
+
+
+        <button
+          type="button"
+          role="tab"
+          data-nav="checkout"
+          aria-controls="checkout"
+          aria-selected="false"
+          onclick="switchTab('checkout')"
+          class="desktop-nav-btn min-h-[44px] px-4 rounded-xl text-sm font-semibold transition-colors inline-flex items-center gap-2"
+        >
+          <span>Checkout</span>
+          <span id="desktop-checkout-badge" class="hidden px-2 py-0.5 rounded-full bg-forest text-white text-[11px] font-bold">1</span>
+        </button>
+      </nav>
+
+      <!-- Compact Chat WA Button (Visible on Mobile & Desktop) -->
+      <div class="flex items-center gap-2 shrink-0">
+      <button
+        type="button"
+        id="motion-toggle"
+        onclick="toggleMotion()"
+        aria-pressed="false"
+        aria-label="Jeda animasi"
+        class="min-h-[44px] min-w-[44px] rounded-xl border border-borderlight hover:bg-softgreen text-forest inline-flex items-center justify-center"
+      >
+        <svg id="motion-icon" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <rect x="6" y="5" width="4" height="14" rx="1" />
+          <rect x="14" y="5" width="4" height="14" rx="1" />
+        </svg>
+      </button>
+      <a
+        href="https://wa.me/62816651978?text=Halo%20Kemas.in%2C%20saya%20ingin%20konsultasi%20paket%20custom%20branding%20dan%20kemasan%20UMKM."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="min-h-[44px] px-4 py-2 rounded-xl bg-forest hover:bg-forest-hover text-white text-sm font-semibold inline-flex items-center gap-2 transition-colors shrink-0"
+      >
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+        </svg>
+        <span>Chat WA</span>
+      </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       LIVE STATUS TOAST
+       ===================================================================== -->
+  <div
+    id="toast-container"
+    role="status"
+    aria-live="polite"
+    class="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-md pointer-events-none hidden"
+  >
+    <div class="bg-forest text-white px-4 py-3 rounded-xl shadow-lg border border-forest-bright flex items-center gap-3 text-sm font-medium pointer-events-auto">
+      <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+        <polyline points="22 4 12 14.01 9 11.01" />
+      </svg>
+      <span id="toast-text">Perubahan disimpan.</span>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       MAIN CONTENT AREA (Bottom padding 96px on mobile for fixed nav)
+       ===================================================================== -->
+  <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-24 md:pb-14">
+
+    <!-- ===================================================================
+         VIEW 1: KATALOG PRODUK & PAKET
+         =================================================================== -->
+    <section id="katalog" role="tabpanel" aria-labelledby="hero-heading" class="tab-view space-y-10">
+
+      <!-- Hero: panel hijau tua jadi satu-satunya titik fokus di layar pertama -->
+      <div class="reveal relative overflow-hidden rounded-3xl bg-forest text-white grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center p-6 sm:p-10 lg:p-12">
+        <div class="lg:col-span-6 space-y-5 relative z-10">
+          <h1 id="hero-heading" class="font-extrabold text-white text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.15] tracking-tight">Kemasan rapi untuk produk UMKM yang baru mulai jualan</h1>
+          <p class="text-sm sm:text-base text-[#D7EBDD] leading-relaxed max-w-xl">
+            Satu pemesanan untuk desain logo, stiker label, thank you card, paper bag, hang tag, sampai mailer. Mulai dari 1 paket (100 set) dengan harga yang tertera sejak awal.
+          </p>
+          <div class="pt-1 flex flex-col sm:flex-row gap-3">
+            <button
+              type="button"
+              onclick="switchTab('estimasi')"
+              class="min-h-[48px] px-6 py-3 rounded-xl bg-white hover:bg-softgreen text-forest text-sm font-bold inline-flex items-center justify-center transition-colors"
+            >
+              Hitung biaya kemasan
+            </button>
+            <a
+              href="https://wa.me/62816651978?text=Halo%20Kemas.in%2C%20saya%20ingin%20konsultasi%20pembuatan%20identitas%20merek%20dan%20kemasan%20untuk%20UMKM%20saya."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="min-h-[48px] px-6 py-3 rounded-xl border border-white/60 hover:bg-white/10 text-white text-sm font-semibold inline-flex items-center justify-center gap-2 transition-colors"
+            >
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+              </svg>
+              <span>Tanya desainer di WhatsApp</span>
+            </a>
+          </div>
+          <dl class="pt-3 grid grid-cols-3 gap-3 max-w-lg text-xs border-t border-white/20">
+            <div class="pt-3"><dt class="text-[#D7EBDD]">Minimal order</dt><dd class="font-bold text-white text-sm">100 set</dd></div>
+            <div class="pt-3"><dt class="text-[#D7EBDD]">Produksi</dt><dd class="font-bold text-white text-sm">3 sampai 5 hari kerja</dd></div>
+            <div class="pt-3"><dt class="text-[#D7EBDD]">Pembayaran</dt><dd class="font-bold text-white text-sm">QRIS atau VA</dd></div>
+          </dl>
+          <p class="text-xs text-[#D7EBDD]">WhatsApp Kemas.in: <strong class="text-white">0816-651-978</strong>. Konsultasi bahan gratis.</p>
+        </div>
+
+        <!-- Ilustrasi kemasan (SVG inline, selalu tampil tanpa file gambar eksternal) -->
+        <div class="lg:col-span-6 relative z-10">
+          <svg viewBox="0 0 480 360" width="480" height="360" class="w-full h-auto max-w-[520px] mx-auto" role="img" aria-label="Ilustrasi paper bag kraft, kotak, thank you card, dan stiker label bermerek">
+            <circle cx="240" cy="185" r="150" fill="#166534" />
+            <ellipse cx="240" cy="318" rx="175" ry="13" fill="#0F3F22" />
+            <g class="svg-fb float-c">
+              <path d="M200 122 C200 66 280 66 280 122" fill="none" stroke="#8C6239" stroke-width="6" stroke-linecap="round" />
+              <rect x="165" y="116" width="150" height="192" rx="8" fill="#D9C3A3" />
+              <path d="M165 116 h150 l-14 24 h-122z" fill="#C4AE8E" />
+              <rect x="195" y="172" width="90" height="72" rx="6" fill="#14532D" />
+              <text x="240" y="203" text-anchor="middle" font-size="15" font-weight="800" fill="#FFFFFF">Merek</text>
+              <text x="240" y="224" text-anchor="middle" font-size="15" font-weight="800" fill="#E8F5EC">Anda</text>
+            </g>
+            <g>
+              <rect x="318" y="228" width="124" height="82" rx="6" fill="#C4AE8E" />
+              <rect x="318" y="228" width="124" height="22" rx="6" fill="#B39A74" />
+              <rect x="358" y="262" width="44" height="24" rx="4" fill="#14532D" />
+            </g>
+            <g class="svg-fb float-a">
+              <g transform="rotate(-10 100 222)">
+                <rect x="50" y="160" width="100" height="136" rx="6" fill="#FFFFFF" />
+                <rect x="50" y="160" width="100" height="36" rx="6" fill="#E8F5EC" />
+                <text x="100" y="232" text-anchor="middle" font-size="13" font-weight="800" fill="#14532D">Terima kasih</text>
+                <rect x="70" y="248" width="60" height="4" rx="2" fill="#D3E4D8" />
+                <rect x="78" y="260" width="44" height="4" rx="2" fill="#D3E4D8" />
+              </g>
+            </g>
+            <g class="svg-fb float-b">
+              <circle cx="384" cy="118" r="40" fill="#FFFFFF" />
+              <circle cx="384" cy="118" r="32" fill="none" stroke="#14532D" stroke-width="3" />
+              <text x="384" y="123" text-anchor="middle" font-size="13" font-weight="800" fill="#14532D">Merek</text>
+            </g>
+            <g class="svg-fb float-d">
+              <path d="M110 70 l22 -16" stroke="#E8F5EC" stroke-width="2" fill="none" />
+              <rect x="128" y="40" width="46" height="62" rx="5" fill="#E9D9BC" transform="rotate(14 151 71)" />
+              <circle cx="146" cy="52" r="3.5" fill="#14532D" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Katalog: 4 kolom sejajar di layar lebar, dirender dari data agar mudah diubah -->
+      <div class="space-y-5">
+        <div class="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-ink">Pilih paket kemasan</h2>
+            <p class="text-sm text-ink-muted mt-1">Harga tertera sejak awal, jadi biaya kemasan per produk mudah dihitung.</p>
+          </div>
+          <span class="text-xs font-semibold text-forest bg-softgreen px-3 py-1.5 rounded-lg border border-borderlight self-start sm:self-auto">
+            Prototipe: pembayaran masih simulasi
+          </span>
+        </div>
+
+        <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch"></div>
+      </div>
+
+      <!-- Alur pemesanan: garis penghubung tergambar saat blok muncul di layar -->
+      <div class="reveal bg-white border border-borderlight rounded-2xl p-5 sm:p-7">
+        <h2 class="text-lg sm:text-xl font-extrabold text-ink">Alur pemesanan</h2>
+        <p class="text-sm text-ink-muted mt-1">Empat langkah dari memilih paket sampai kemasan tiba di tempat usaha Anda.</p>
+
+        <ol class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6">
+          <li class="flow-step">
+            <span class="relative z-10 inline-flex items-center justify-center w-8 h-8 rounded-full bg-forest text-white text-sm font-bold">1</span>
+            <h3 class="mt-3 text-sm font-bold text-ink">Pilih paket dan hitung biaya</h3>
+            <p class="mt-1 text-xs text-ink-muted leading-relaxed">Bandingkan bahan, atur jumlah cetak, lalu lihat biaya kemasan per produk.</p>
+          </li>
+          <li class="flow-step">
+            <span class="relative z-10 inline-flex items-center justify-center w-8 h-8 rounded-full bg-forest text-white text-sm font-bold">2</span>
+            <h3 class="mt-3 text-sm font-bold text-ink">Bayar pre-order</h3>
+            <p class="mt-1 text-xs text-ink-muted leading-relaxed">Bayar lewat QRIS atau Virtual Account bank. Di prototipe ini pembayarannya masih simulasi.</p>
+          </li>
+          <li class="flow-step">
+            <span class="relative z-10 inline-flex items-center justify-center w-8 h-8 rounded-full bg-forest text-white text-sm font-bold">3</span>
+            <h3 class="mt-3 text-sm font-bold text-ink">Kirim brief, setujui mockup</h3>
+            <p class="mt-1 text-xs text-ink-muted leading-relaxed">Setelah bayar, kirim detail merek ke WhatsApp 0816-651-978 dan setujui mockup sebelum cetak.</p>
+          </li>
+          <li class="flow-step">
+            <span class="relative z-10 inline-flex items-center justify-center w-8 h-8 rounded-full bg-forest text-white text-sm font-bold">4</span>
+            <h3 class="mt-3 text-sm font-bold text-ink">Produksi dan pengiriman</h3>
+            <p class="mt-1 text-xs text-ink-muted leading-relaxed">Pesanan dicetak di mitra percetakan, lalu dikirim lewat ekspedisi reguler atau kargo.</p>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Kontak dan etalase -->
+      <div class="reveal bg-softgreen border border-borderlight rounded-2xl p-5 sm:p-7">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-lg font-extrabold text-ink">Lihat hasil cetak dan hubungi Kemas.in</h2>
+            <p class="text-sm text-ink-muted mt-1">Dokumentasi cetakan, inspirasi kemasan, atau belanja lewat etalase kami.</p>
+          </div>
+          <div class="flex flex-wrap gap-2.5">
+            <a
+              href="https://wa.me/62816651978?text=Halo%20Kemas.in%2C%20saya%20ingin%20bertanya%20tentang%20paket%20custom%20branding%20UMKM."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="min-h-[44px] px-4 py-2 rounded-xl bg-forest hover:bg-forest-hover text-white text-sm font-semibold inline-flex items-center gap-2 transition-colors"
+            >
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+              </svg>
+              <span>WhatsApp Business</span>
+            </a>
+            <a href="https://instagram.com/kemas.in" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-4 py-2 rounded-xl bg-white hover:bg-pagebg border border-borderinput text-ink text-sm font-semibold inline-flex items-center gap-2 transition-colors">
+              <svg class="w-4 h-4 shrink-0 text-forest" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
+              <span>Instagram</span>
+            </a>
+            <a href="https://tiktok.com/@kemas.in" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-4 py-2 rounded-xl bg-white hover:bg-pagebg border border-borderinput text-ink text-sm font-semibold inline-flex items-center gap-2 transition-colors">
+              <svg class="w-4 h-4 shrink-0 text-forest" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+              </svg>
+              <span>TikTok</span>
+            </a>
+            <a href="https://shopee.co.id/kemas.in" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-4 py-2 rounded-xl bg-white hover:bg-pagebg border border-borderinput text-ink text-sm font-semibold inline-flex items-center gap-2 transition-colors">
+              <svg class="w-4 h-4 shrink-0 text-forest" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                <path d="M3 6h18" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+              <span>Shopee</span>
+            </a>
+            <a href="https://tokopedia.com/kemas-in" target="_blank" rel="noopener noreferrer" class="min-h-[44px] px-4 py-2 rounded-xl bg-white hover:bg-pagebg border border-borderinput text-ink text-sm font-semibold inline-flex items-center gap-2 transition-colors">
+              <svg class="w-4 h-4 shrink-0 text-forest" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7" />
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4" />
+                <path d="M2 7h20" />
+              </svg>
+              <span>Tokopedia</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         VIEW 2: KALKULATOR ESTIMASI HARGA
+         =================================================================== -->
+    <section id="estimasi" role="tabpanel" aria-labelledby="heading-estimasi" class="tab-view hidden space-y-6">
+      <div>
+        <h2 id="heading-estimasi" class="view-title font-extrabold text-ink">Kalkulator Estimasi Harga</h2>
+        <p class="text-sm text-ink-muted mt-1">Atur paket atau item satuan, jenis bahan, serta jumlah cetak untuk mengetahui total biaya dan HPP kemasan per pcs.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Left Panel: Controls -->
+        <div class="lg:col-span-7 bg-white border border-borderlight rounded-2xl p-5 sm:p-6 space-y-6">
+          <!-- Mode Toggle -->
+          <fieldset>
+            <legend class="text-sm font-bold text-ink mb-2.5">1. Jenis Pemesanan</legend>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button
+                type="button"
+                id="est-mode-bundling"
+                onclick="setEstimatorMode('bundling')"
+                class="min-h-[52px] px-4 py-3 rounded-xl border text-left transition-colors"
+              >
+                <span class="block text-sm font-bold">Paket Bundling</span>
+                <span class="block text-xs text-ink-muted mt-0.5">Starter Brand Kit &amp; Growth Kit</span>
+              </button>
+              <button
+                type="button"
+                id="est-mode-satuan"
+                onclick="setEstimatorMode('satuan')"
+                class="min-h-[52px] px-4 py-3 rounded-xl border text-left transition-colors"
+              >
+                <span class="block text-sm font-bold">Item Satuan / Cetak Ulang</span>
+                <span class="block text-xs text-ink-muted mt-0.5">Stiker, Card, Paper Bag, Hang Tag, Mailer</span>
+              </button>
+            </div>
+          </fieldset>
+
+          <!-- Package Selector (Bundling) -->
+          <div id="est-bundling-wrap">
+            <label for="est-select-bundle" class="block text-sm font-bold text-ink mb-2">2. Pilih Paket Bundling</label>
+            <select
+              id="est-select-bundle"
+              onchange="handleBundleSelect(this.value)"
+              class="form-field w-full min-h-[46px] px-3.5 py-2.5 rounded-xl text-sm font-medium"
+            >
+              <option value="starter">Starter Brand Kit (Logo + Stiker + Thank You Card) - Rp200.000 / 100 set</option>
+              <option value="growth">Growth Packaging Kit (Paper Bag + Hang Tag + Card + Packaging) - Rp500.000 / 100 set</option>
+            </select>
+            <p id="est-bundle-note" class="mt-2 text-xs text-ink-muted"></p>
+          </div>
+
+          <!-- Item Selector (Satuan) -->
+          <div id="est-satuan-wrap" class="hidden">
+            <label for="est-select-item" class="block text-sm font-bold text-ink mb-2">2. Pilih Item Satuan / Cetak Ulang</label>
+            <select
+              id="est-select-item"
+              onchange="handleItemSelect(this.value)"
+              class="form-field w-full min-h-[46px] px-3.5 py-2.5 rounded-xl text-sm font-medium"
+            >
+              <option value="stiker">Stiker Label Produk</option>
+              <option value="thankyou">Thank You Card</option>
+              <option value="paperbag">Paper Bag Custom</option>
+              <option value="hangtag">Hang Tag</option>
+              <option value="mailer">Mailer Kraft Custom</option>
+            </select>
+          </div>
+
+          <!-- Dynamic Material Selector -->
+          <div>
+            <label for="est-select-material" class="block text-sm font-bold text-ink mb-2">3. Pilih Bahan Cetak</label>
+            <select
+              id="est-select-material"
+              onchange="handleMaterialSelect(this.value)"
+              class="form-field w-full min-h-[46px] px-3.5 py-2.5 rounded-xl text-sm font-medium"
+            ></select>
+            <p id="est-material-desc" class="mt-2 text-xs text-ink-muted"></p>
+          </div>
+
+          <!-- Quantity Selector & Presets -->
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <label for="est-qty-input" class="block text-sm font-bold text-ink">4. Jumlah Cetak (pcs / set)</label>
+              <span id="est-volume-badge" class="hidden px-2.5 py-0.5 rounded-md bg-softgreen text-forest text-xs font-bold border border-borderlight"></span>
+            </div>
+
+            <div class="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-3">
+              <button type="button" data-qty="50" onclick="setEstimatorQty(50)" class="qty-btn min-h-[44px] rounded-xl border text-xs sm:text-sm font-semibold transition-colors">50</button>
+              <button type="button" data-qty="100" onclick="setEstimatorQty(100)" class="qty-btn min-h-[44px] rounded-xl border text-xs sm:text-sm font-semibold transition-colors">100</button>
+              <button type="button" data-qty="250" onclick="setEstimatorQty(250)" class="qty-btn min-h-[44px] rounded-xl border text-xs sm:text-sm font-semibold transition-colors">250 (-10%)</button>
+              <button type="button" data-qty="500" onclick="setEstimatorQty(500)" class="qty-btn min-h-[44px] rounded-xl border text-xs sm:text-sm font-semibold transition-colors">500 (-15%)</button>
+              <button type="button" data-qty="1000" onclick="setEstimatorQty(1000)" class="qty-btn min-h-[44px] rounded-xl border text-xs sm:text-sm font-semibold transition-colors">1000 (-15%)</button>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <input
+                type="number"
+                id="est-qty-input"
+                min="25"
+                max="10000"
+                step="5"
+                value="100"
+                oninput="handleQtyInput(this.value)"
+                class="form-field w-full min-h-[46px] px-3.5 py-2 rounded-xl text-sm font-semibold"
+              />
+              <span class="text-sm font-semibold text-ink-muted shrink-0">pcs</span>
+            </div>
+            <p class="mt-2 text-xs text-ink-muted">
+              Potongan volume otomatis: diskon 10% untuk minimal 250 pcs dan diskon 15% untuk minimal 500 pcs.
+            </p>
+          </div>
+
+          <!-- Optional Add-on: Logo Design -->
+          <div class="pt-3 border-t border-borderlight">
+            <label for="est-logo-addon" id="est-logo-addon-label" class="flex items-start gap-3 p-3.5 rounded-xl bg-softgreen/60 border border-borderlight min-h-[44px]">
+              <input
+                type="checkbox"
+                id="est-logo-addon"
+                onchange="handleLogoAddon(this.checked)"
+                class="mt-0.5 w-5 h-5 rounded accent-[#14532D]"
+              />
+              <span class="flex-1">
+                <span id="est-logo-addon-title" class="block text-sm font-bold text-ink">Tambah Jasa Desain Logo Baru (+Rp75.000)</span>
+                <span id="est-logo-addon-desc" class="block text-xs text-ink-muted mt-0.5">Termasuk 2 konsep logo awal dan file master siap cetak.</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Right Panel: Live Summary -->
+        <aside class="lg:col-span-5 lg:sticky lg:top-24 bg-white border-2 border-forest rounded-2xl p-5 sm:p-6 space-y-5">
+          <div>
+            <p class="text-xs font-bold text-forest-bright uppercase tracking-wider">Ringkasan Estimasi</p>
+            <h3 id="est-summary-title" class="text-lg font-extrabold text-ink mt-1">Starter Brand Kit</h3>
+            <p id="est-summary-meta" class="text-xs text-ink-muted mt-0.5">Bahan: Vinyl Waterproof + Art Carton 260gsm | 100 pcs</p>
+          </div>
+
+          <dl class="space-y-3 text-sm pt-2 border-t border-borderlight">
+            <div class="flex items-center justify-between gap-2">
+              <dt class="text-ink-muted">Subtotal Cetak</dt>
+              <dd id="est-subtotal" class="font-semibold text-ink">Rp200.000</dd>
+            </div>
+            <div id="est-addon-row" class="hidden items-center justify-between gap-2">
+              <dt class="text-ink-muted">Jasa Desain Logo Baru</dt>
+              <dd class="font-semibold text-ink">Rp75.000</dd>
+            </div>
+            <div id="est-discount-row" class="hidden items-center justify-between gap-2 text-forest">
+              <dt id="est-discount-label" class="font-semibold">Potongan Volume (10%)</dt>
+              <dd id="est-discount-val" class="font-bold">-Rp0</dd>
+            </div>
+            <div class="pt-3 border-t border-borderlight flex items-baseline justify-between gap-2">
+              <dt class="font-bold text-ink">Total Estimasi</dt>
+              <dd id="est-total" class="text-2xl font-extrabold text-forest">Rp200.000</dd>
+            </div>
+          </dl>
+
+          <!-- Unit Cost Card -->
+          <div class="bg-softgreen border border-borderlight rounded-xl p-4 flex items-center justify-between gap-3">
+            <div>
+              <p class="text-xs font-bold text-forest">Biaya Kemasan per Produk</p>
+              <p class="text-xs text-ink-muted mt-0.5">Acuan langsung untuk hitung HPP</p>
+            </div>
+            <p id="est-unit-cost" class="text-lg font-extrabold text-ink shrink-0">Rp2.000 / pcs</p>
+          </div>
+
+          <div class="space-y-2.5">
+            <button
+              type="button"
+              onclick="goToCheckoutFromEstimator()"
+              class="w-full min-h-[48px] px-5 py-3 rounded-xl bg-forest hover:bg-forest-hover text-white text-sm font-semibold inline-flex items-center justify-center gap-2 transition-colors"
+            >
+              <span>Lanjut ke Checkout (QRIS / VA)</span>
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </button>
+
+            <a
+              id="est-wa-link"
+              href="https://wa.me/62816651978"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full min-h-[46px] px-5 py-2.5 rounded-xl bg-softgreen hover:bg-borderlight border border-borderinput text-forest text-sm font-semibold inline-flex items-center justify-center gap-2 transition-colors"
+            >
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+              </svg>
+              <span>Tanya Bahan Ini via WhatsApp</span>
+            </a>
+
+            <button
+              type="button"
+              onclick="switchTab('katalog')"
+              class="w-full min-h-[44px] px-4 py-2 rounded-xl bg-white hover:bg-pagebg border border-borderlight text-ink text-xs font-semibold transition-colors"
+            >
+              Lihat paket lain di katalog
+            </button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         VIEW 4: CHECKOUT & SIMULASI PEMBAYARAN (QRIS / VA BANK)
+         =================================================================== -->
+    <section id="checkout" role="tabpanel" aria-labelledby="heading-checkout" class="tab-view hidden space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <h2 id="heading-checkout" class="view-title font-extrabold text-ink">Checkout &amp; Pembayaran Pre-Order</h2>
+          <p class="text-sm text-ink-muted mt-1">Lengkapi data pengiriman lalu pilih QRIS atau Virtual Account bank untuk membuat kode pembayaran.</p>
+        </div>
+        <span class="px-3 py-1.5 rounded-lg bg-softgreen border border-borderlight text-forest text-xs font-bold self-start sm:self-auto">
+          Simulasi Prototipe Pembayaran
+        </span>
+      </div>
+
+      <!-- STEP 1 & 2: CHECKOUT FORM -->
+      <div id="checkout-form-stage" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <form id="checkout-form" novalidate onsubmit="generatePaymentCode(event)" class="lg:col-span-7 space-y-6">
+          <!-- Step 1: Data Pemesan & Pengiriman -->
+          <div class="bg-white border border-borderlight rounded-2xl p-5 sm:p-6 space-y-4">
+            <h3 class="text-base font-bold text-ink">1. Data Pemesan &amp; Pengiriman</h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="co-fullname" class="block text-sm font-bold text-ink mb-1.5">
+                  Nama Lengkap <span class="text-errortext" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="co-fullname"
+                  required
+                  placeholder="Contoh: Rina Wulandari"
+                  oninput="clearFieldError('co-fullname', 'err-co-fullname')"
+                  class="form-field w-full min-h-[46px] px-3.5 py-2.5 rounded-xl text-sm"
+                />
+                <p id="err-co-fullname" role="alert" class="hidden mt-1.5 px-3 py-1.5 rounded-lg bg-errorbg text-errortext text-xs font-semibold">
+                  Nama lengkap wajib diisi.
+                </p>
+              </div>
+
+              <div>
+                <label for="co-brand" class="block text-sm font-bold text-ink mb-1.5">
+                  Nama Merek UMKM <span class="text-errortext" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="co-brand"
+                  required
+                  placeholder="Contoh: Kopi Hutan"
+                  oninput="clearFieldError('co-brand', 'err-co-brand')"
+                  class="form-field w-full min-h-[46px] px-3.5 py-2.5 rounded-xl text-sm"
+                />
+                <p id="err-co-brand" role="alert" class="hidden mt-1.5 px-3 py-1.5 rounded-lg bg-errorbg text-errortext text-xs font-semibold">
+                  Nama merek UMKM wajib diisi.
+                </p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="co-wa" class="block text-sm font-bold text-ink mb-1.5">
+                  Nomor WhatsApp Pemesan <span class="text-errortext" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="co-wa"
+                  required
+                  placeholder="Contoh: 081234567890"
+                  oninput="clearFieldError('co-wa', 'err-co-wa')"
+                  class="form-field w-full min-h-[46px] px-3.5 py-2.5 rounded-xl text-sm"
+                />
+                <p id="err-co-wa" role="alert" class="hidden mt-1.5 px-3 py-1.5 rounded-lg bg-errorbg text-errortext text-xs font-semibold">
+                  Masukkan nomor WhatsApp yang valid (minimal 9 digit).
+                </p>
+              </div>
+
+              <div>
+                <label for="co-city" class="block text-sm font-bold text-ink mb-1.5">
+                  Kota / Alamat Pengiriman <span class="text-errortext" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="co-city"
+                  required
+                  placeholder="Contoh: Semarang, Jl. Pandanaran No. 12"
+                  oninput="clearFieldError('co-city', 'err-co-city')"
+                  class="form-field w-full min-h-[46px] px-3.5 py-2.5 rounded-xl text-sm"
+                />
+                <p id="err-co-city" role="alert" class="hidden mt-1.5 px-3 py-1.5 rounded-lg bg-errorbg text-errortext text-xs font-semibold">
+                  Kota dan alamat pengiriman wajib diisi.
+                </p>
+              </div>
+            </div>
+
+            <!-- Pilihan Ekspedisi -->
+            <fieldset class="pt-2">
+              <legend class="text-sm font-bold text-ink mb-2">Pilihan Ekspedisi (Pulau Jawa &amp; Nasional)</legend>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <label for="ship-reguler" class="ship-card min-h-[54px] p-3.5 rounded-xl border flex items-start gap-3 transition-colors">
+                  <input type="radio" id="ship-reguler" name="shippingMethod" value="reguler" checked onchange="handleShippingChange('reguler')" class="mt-1 w-4 h-4 accent-[#14532D]" />
+                  <span class="flex-1">
+                    <span class="flex items-center justify-between gap-2 text-sm font-bold text-ink">
+                      <span>Reguler (JNE / J&amp;T)</span>
+                      <span class="text-forest">Rp15.000</span>
+                    </span>
+                    <span class="block text-xs text-ink-muted mt-0.5">Estimasi tiba 2 sampai 4 hari kerja</span>
+                  </span>
+                </label>
+
+                <label for="ship-kargo" class="ship-card min-h-[54px] p-3.5 rounded-xl border flex items-start gap-3 transition-colors">
+                  <input type="radio" id="ship-kargo" name="shippingMethod" value="kargo" onchange="handleShippingChange('kargo')" class="mt-1 w-4 h-4 accent-[#14532D]" />
+                  <span class="flex-1">
+                    <span class="flex items-center justify-between gap-2 text-sm font-bold text-ink">
+                      <span>Kargo Hemat</span>
+                      <span class="text-forest">Rp28.000</span>
+                    </span>
+                    <span class="block text-xs text-ink-muted mt-0.5">Untuk kemasan bervolume besar, 3 sampai 6 hari</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- Kode Referral UMKM -->
+            <div class="pt-2 border-t border-borderlight">
+              <label for="co-referral" class="block text-sm font-bold text-ink mb-1.5">
+                Kode Referral UMKM <span class="text-xs font-normal text-ink-muted">(opsional, coba kode: UMKM10)</span>
+              </label>
+              <div class="flex gap-2">
+                <input
+                  type="text"
+                  id="co-referral"
+                  placeholder="Masukkan UMKM10"
+                  class="form-field flex-1 min-h-[46px] px-3.5 py-2 rounded-xl text-sm uppercase"
+                />
+                <button
+                  type="button"
+                  id="btn-apply-referral"
+                  onclick="applyReferralCode()"
+                  class="min-h-[46px] px-4 py-2 rounded-xl bg-softgreen hover:bg-borderlight border border-borderinput text-forest text-sm font-semibold shrink-0 transition-colors"
+                >
+                  Terapkan
+                </button>
+              </div>
+              <p id="co-referral-feedback" role="status" aria-live="polite" class="hidden mt-1.5 text-xs font-semibold"></p>
+            </div>
+          </div>
+
+          <!-- Step 2: Metode Pembayaran Pre-Order -->
+          <div class="bg-white border border-borderlight rounded-2xl p-5 sm:p-6 space-y-4">
+            <h3 class="text-base font-bold text-ink">2. Pilih Metode Pembayaran (Pre-Order)</h3>
+
+            <fieldset class="space-y-3">
+              <legend class="sr-only">Metode pembayaran pre-order</legend>
+
+              <!-- Option 1: QRIS -->
+              <label for="pay-qris" class="pay-card min-h-[56px] p-4 rounded-xl border flex items-start gap-3 transition-colors">
+                <input type="radio" id="pay-qris" name="paymentType" value="qris" checked onchange="handlePaymentTypeChange('qris')" class="mt-1 w-4 h-4 accent-[#14532D]" />
+                <span class="flex-1">
+                  <span class="block text-sm font-bold text-ink">QRIS (Semua E-Wallet &amp; Mobile Banking)</span>
+                  <span class="block text-xs text-ink-muted mt-0.5">Mendukung GoPay, OVO, DANA, ShopeePay, BCA Mobile, Livin by Mandiri, BRImo.</span>
+                </span>
+              </label>
+
+              <!-- Option 2: Virtual Account Bank -->
+              <label for="pay-va" class="pay-card min-h-[56px] p-4 rounded-xl border flex items-start gap-3 transition-colors">
+                <input type="radio" id="pay-va" name="paymentType" value="va" onchange="handlePaymentTypeChange('va')" class="mt-1 w-4 h-4 accent-[#14532D]" />
+                <span class="flex-1">
+                  <span class="block text-sm font-bold text-ink">Virtual Account Bank</span>
+                  <span class="block text-xs text-ink-muted mt-0.5">Verifikasi otomatis melalui transfer Virtual Account BCA, Mandiri, BRI, atau BNI.</span>
+                </span>
+              </label>
+            </fieldset>
+
+            <!-- Bank Selector (Shown when VA is active) -->
+            <div id="va-bank-selector" class="hidden pt-2 pl-1">
+              <p class="text-xs font-bold text-ink mb-2">Pilih Bank Virtual Account:</p>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <button type="button" data-bank="BCA" onclick="selectVaBank('BCA')" class="bank-btn min-h-[46px] px-3 py-2 rounded-xl border text-xs sm:text-sm font-bold transition-colors">BCA VA</button>
+                <button type="button" data-bank="Mandiri" onclick="selectVaBank('Mandiri')" class="bank-btn min-h-[46px] px-3 py-2 rounded-xl border text-xs sm:text-sm font-bold transition-colors">Mandiri VA</button>
+                <button type="button" data-bank="BRI" onclick="selectVaBank('BRI')" class="bank-btn min-h-[46px] px-3 py-2 rounded-xl border text-xs sm:text-sm font-bold transition-colors">BRI VA</button>
+                <button type="button" data-bank="BNI" onclick="selectVaBank('BNI')" class="bank-btn min-h-[46px] px-3 py-2 rounded-xl border text-xs sm:text-sm font-bold transition-colors">BNI VA</button>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <button
+                type="submit"
+                class="w-full min-h-[50px] px-6 py-3 rounded-xl bg-forest hover:bg-forest-hover text-white text-sm font-bold inline-flex items-center justify-center gap-2 transition-colors"
+              >
+                <span>Buat Kode Pembayaran</span>
+                <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Right Column: Active Order Summary -->
+        <aside class="lg:col-span-5 lg:sticky lg:top-24 bg-white border border-borderlight rounded-2xl p-5 sm:p-6 space-y-4">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <p class="text-xs font-bold text-forest uppercase tracking-wide">Ringkasan Pesanan</p>
+              <h3 id="co-summary-item" class="text-base font-extrabold text-ink mt-1">Starter Brand Kit</h3>
+              <p id="co-summary-spec" class="text-xs text-ink-muted mt-0.5">100 pcs | Vinyl Waterproof + Art Carton 260gsm</p>
+            </div>
+            <button
+              type="button"
+              onclick="switchTab('estimasi')"
+              class="min-h-[44px] px-3 py-1.5 rounded-lg bg-softgreen hover:bg-borderlight border border-borderlight text-forest text-xs font-semibold shrink-0 transition-colors"
+            >
+              Ubah
+            </button>
+          </div>
+
+          <dl class="space-y-2.5 text-sm pt-3 border-t border-borderlight">
+            <div class="flex items-center justify-between gap-2">
+              <dt class="text-ink-muted">Subtotal Pesanan</dt>
+              <dd id="co-subtotal" class="font-semibold text-ink">Rp200.000</dd>
+            </div>
+            <div id="co-vol-disc-row" class="hidden items-center justify-between gap-2 text-forest">
+              <dt id="co-vol-disc-label" class="font-medium">Potongan Volume</dt>
+              <dd id="co-vol-disc-val" class="font-bold">-Rp0</dd>
+            </div>
+            <div id="co-ref-disc-row" class="hidden items-center justify-between gap-2 text-forest">
+              <dt class="font-medium">Diskon Referral (UMKM10)</dt>
+              <dd id="co-ref-disc-val" class="font-bold">-Rp0</dd>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <dt id="co-ship-label" class="text-ink-muted">Ongkir Reguler (JNE / J&amp;T)</dt>
+              <dd id="co-ship-val" class="font-semibold text-ink">Rp15.000</dd>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <dt class="text-ink-muted">Kode Unik</dt>
+              <dd class="font-semibold text-ink">Rp0</dd>
+            </div>
+            <div class="pt-3 border-t border-borderlight flex items-baseline justify-between gap-2">
+              <dt class="font-bold text-ink">Total Tagihan</dt>
+              <dd id="co-grand-total" class="text-2xl font-extrabold text-forest">Rp215.000</dd>
+            </div>
+          </dl>
+
+          <p class="text-xs text-ink-muted bg-pagebg border border-borderlight rounded-xl p-3 leading-relaxed">
+            Pembayaran pada halaman ini merupakan simulasi prototipe untuk menguji alur checkout QRIS dan Virtual Account Kemas.in.
+          </p>
+        </aside>
+      </div>
+
+      <!-- STEP 3: LAYAR TAGIHAN & SIMULASI QRIS / VA BANK -->
+      <div id="checkout-invoice-stage" class="hidden max-w-2xl mx-auto space-y-5">
+        <div class="bg-white border-2 border-forest rounded-2xl p-5 sm:p-7 space-y-5">
+          <!-- Invoice Top Header -->
+          <div class="flex flex-wrap items-start justify-between gap-3 pb-4 border-b border-borderlight">
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="px-2.5 py-1 rounded-md bg-softgreen border border-borderlight text-forest text-xs font-bold">Simulasi Prototipe</span>
+                <span class="text-xs font-semibold text-ink-muted">Order ID: <strong id="inv-order-id" class="text-ink">KMS-2026-8412</strong></span>
+              </div>
+              <h3 id="inv-title" class="text-lg sm:text-xl font-extrabold text-ink mt-2">Selesaikan Pembayaran via QRIS</h3>
+            </div>
+
+            <div class="bg-softgreen border border-borderlight rounded-xl px-3.5 py-2 text-right">
+              <span class="block text-[11px] font-semibold text-ink-muted">Batas Waktu Bayar</span>
+              <span id="inv-countdown" class="text-base font-extrabold text-forest tabular-nums">14:59</span>
+            </div>
+          </div>
+
+          <!-- Total Breakdown Bar -->
+          <div class="bg-pagebg border border-borderlight rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <p class="text-xs font-semibold text-ink-muted">Total Tagihan Pembayaran</p>
+              <p id="inv-total-amount" class="text-2xl font-extrabold text-forest mt-0.5">Rp215.000</p>
+              <p id="inv-breakdown-note" class="text-xs text-ink-muted mt-1"></p>
+            </div>
+            <button
+              type="button"
+              onclick="copyInvoiceAmount()"
+              class="min-h-[44px] px-4 py-2 rounded-xl bg-white hover:bg-softgreen border border-borderinput text-forest text-xs font-bold inline-flex items-center justify-center gap-2 shrink-0 transition-colors"
+            >
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+              </svg>
+              <span>Salin Nominal</span>
+            </button>
+          </div>
+
+          <!-- QRIS Payment Panel -->
+          <div id="inv-qris-panel" class="space-y-4">
+            <div id="qris-svg-mount" class="flex justify-center">
+              <!-- Deterministic high-contrast QRIS SVG card rendered here -->
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button
+                type="button"
+                onclick="downloadQrisSvg()"
+                class="min-h-[46px] px-4 py-2.5 rounded-xl bg-softgreen hover:bg-borderlight border border-borderinput text-forest text-sm font-semibold inline-flex items-center justify-center gap-2 transition-colors"
+              >
+                <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" x2="12" y1="15" y2="3" />
+                </svg>
+                <span>Unduh QRIS (Simulasi)</span>
+              </button>
+
+              <button
+                type="button"
+                onclick="confirmSimulatedPayment()"
+                class="min-h-[46px] px-4 py-2.5 rounded-xl bg-forest hover:bg-forest-hover text-white text-sm font-bold inline-flex items-center justify-center gap-2 transition-colors"
+              >
+                <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>Simulasi Sudah Bayar</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Virtual Account Bank Panel -->
+          <div id="inv-va-panel" class="hidden space-y-4">
+            <div class="bg-softgreen/70 border border-borderlight rounded-xl p-4 sm:p-5 space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <span id="inv-va-bank-name" class="text-sm font-extrabold text-forest">BCA Virtual Account</span>
+                <span class="text-xs font-semibold text-ink-muted">a.n. KEMAS.IN STUDIO</span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white border border-borderinput rounded-xl p-3.5">
+                <div>
+                  <span class="block text-[11px] font-semibold text-ink-muted">Nomor Virtual Account</span>
+                  <span id="inv-va-number" class="text-lg sm:text-xl font-extrabold text-ink tracking-wider tabular-nums">88010 8166 519 78</span>
+                </div>
+                <button
+                  type="button"
+                  onclick="copyVaNumber()"
+                  class="min-h-[44px] px-4 py-2 rounded-xl bg-softgreen hover:bg-borderlight border border-borderinput text-forest text-xs font-bold inline-flex items-center justify-center gap-2 shrink-0 transition-colors"
+                >
+                  <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                  </svg>
+                  <span>Salin Nomor VA</span>
+                </button>
+              </div>
+              <p id="va-copy-feedback" role="status" aria-live="polite" class="hidden text-xs font-bold text-forest"></p>
+            </div>
+
+            <!-- Payment Instruction Accordions -->
+            <div class="space-y-2">
+              <details open class="bg-pagebg border border-borderlight rounded-xl p-4">
+                <summary class="text-sm font-bold text-ink min-h-[28px] flex items-center justify-between">
+                  <span>Petunjuk Pembayaran Mobile Banking</span>
+                  <span class="text-xs font-semibold text-forest">Lihat</span>
+                </summary>
+                <ol id="va-steps-mobile" class="mt-3 pl-5 list-decimal space-y-1.5 text-xs text-ink-muted leading-relaxed"></ol>
+              </details>
+
+              <details class="bg-pagebg border border-borderlight rounded-xl p-4">
+                <summary class="text-sm font-bold text-ink min-h-[28px] flex items-center justify-between">
+                  <span>Petunjuk Pembayaran via ATM</span>
+                  <span class="text-xs font-semibold text-forest">Lihat</span>
+                </summary>
+                <ol id="va-steps-atm" class="mt-3 pl-5 list-decimal space-y-1.5 text-xs text-ink-muted leading-relaxed"></ol>
+              </details>
+            </div>
+
+            <button
+              type="button"
+              onclick="confirmSimulatedPayment()"
+              class="w-full min-h-[48px] px-5 py-3 rounded-xl bg-forest hover:bg-forest-hover text-white text-sm font-bold inline-flex items-center justify-center gap-2 transition-colors"
+            >
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span>Simulasi Sudah Bayar</span>
+            </button>
+          </div>
+
+          <div class="pt-2 border-t border-borderlight flex justify-between items-center">
+            <button
+              type="button"
+              onclick="backToCheckoutForm()"
+              class="min-h-[44px] px-3 py-2 text-xs font-semibold text-ink-muted hover:text-ink underline"
+            >
+              Ubah Metode Pembayaran
+            </button>
+            <span class="text-xs text-ink-muted">Bantuan WA: 0816-651-978</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: RECEIPT & 5-STAGE INTERACTIVE ORDER STATUS TRACKER -->
+      <div id="checkout-receipt-stage" class="hidden max-w-2xl mx-auto space-y-5">
+        <div class="bg-white border-2 border-forest rounded-2xl p-5 sm:p-7 space-y-6">
+          <div class="flex items-start gap-3.5 pb-4 border-b border-borderlight">
+            <span class="w-11 h-11 rounded-xl bg-softgreen border border-borderlight text-forest flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+            </span>
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded-md bg-softgreen text-forest text-xs font-bold">Simulasi Prototipe</span>
+              <h3 class="text-lg sm:text-xl font-extrabold text-ink mt-1">Pembayaran Terkonfirmasi - Simulasi</h3>
+              <p class="text-xs text-ink-muted mt-0.5">Pesanan Anda tercatat. Langkah berikutnya adalah mengirim brief desain ke WhatsApp Kemas.in.</p>
+            </div>
+          </div>
+
+          <!-- Receipt Details -->
+          <dl class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-pagebg border border-borderlight rounded-xl p-4 text-xs sm:text-sm">
+            <div>
+              <dt class="text-ink-muted">Order ID</dt>
+              <dd id="rcpt-order-id" class="font-bold text-ink mt-0.5">KMS-2026-8412</dd>
+            </div>
+            <div>
+              <dt class="text-ink-muted">Waktu Konfirmasi</dt>
+              <dd id="rcpt-timestamp" class="font-bold text-ink mt-0.5"></dd>
+            </div>
+            <div>
+              <dt class="text-ink-muted">Pemesan / Merek</dt>
+              <dd id="rcpt-customer" class="font-bold text-ink mt-0.5"></dd>
+            </div>
+            <div>
+              <dt class="text-ink-muted">Metode Pembayaran</dt>
+              <dd id="rcpt-method" class="font-bold text-ink mt-0.5"></dd>
+            </div>
+            <div>
+              <dt class="text-ink-muted">Paket / Spesifikasi</dt>
+              <dd id="rcpt-package" class="font-bold text-ink mt-0.5"></dd>
+            </div>
+            <div>
+              <dt class="text-ink-muted">Total Dibayar</dt>
+              <dd id="rcpt-total" class="font-extrabold text-forest text-base mt-0.5"></dd>
+            </div>
+          </dl>
+
+          <!-- 5-Stage Interactive Order Status Tracker -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <h4 class="text-sm font-extrabold text-ink">Pelacak Status Pesanan (5 Tahap)</h4>
+              <span class="text-xs font-semibold text-forest">Tahap 1 Aktif</span>
+            </div>
+
+            <ol id="receipt-tracker-list" class="space-y-2.5">
+              <!-- Rendered dynamically with interactive preview note -->
+            </ol>
+          </div>
+
+          <!-- Direct WA CTA & Reset -->
+          <div class="pt-3 border-t border-borderlight space-y-2.5">
+            <a
+              id="rcpt-wa-cta"
+              href="https://wa.me/62816651978"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full min-h-[50px] px-5 py-3 rounded-xl bg-forest hover:bg-forest-hover text-white text-sm font-bold inline-flex items-center justify-center gap-2 transition-colors"
+            >
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+              </svg>
+              <span>Konfirmasi Order &amp; Kirim Brief ke WA (0816-651-978)</span>
+            </a>
+
+            <button
+              type="button"
+              onclick="resetCheckoutSimulation()"
+              class="w-full min-h-[44px] px-4 py-2.5 rounded-xl bg-softgreen hover:bg-borderlight border border-borderinput text-forest text-sm font-semibold transition-colors"
+            >
+              Buat Pesanan Baru
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       COMPACT PURPOSEFUL FOOTER
+       ===================================================================== -->
+  <footer class="bg-white border-t border-borderlight pb-24 md:pb-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div class="space-y-2 max-w-md">
+        <span class="brand-logo">
+          <span style="color: #14532D;">Kemas</span><span style="color: #15803D;">.in</span>
+        </span>
+        <p class="text-xs sm:text-sm text-ink-muted leading-relaxed">
+          Jasa custom branding dan perlengkapan identitas merek untuk UMKM serta bisnis pemula.
+        </p>
+        <p class="text-xs font-semibold text-ink">
+          WhatsApp Business:
+          <a href="https://wa.me/62816651978" target="_blank" rel="noopener noreferrer" class="text-forest underline hover:text-forest-hover">0816-651-978</a>
+        </p>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        <a
+          href="https://wa.me/62816651978?text=Halo%20Kemas.in%2C%20saya%20ingin%20bertanya%20tentang%20paket%20custom%20branding%20UMKM."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="min-h-[44px] px-3.5 py-2 rounded-xl bg-softgreen hover:bg-borderlight border border-borderinput text-forest text-xs font-bold inline-flex items-center gap-1.5 transition-colors"
+        >
+          <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+          </svg>
+          <span>WhatsApp</span>
+        </a>
+
+        <a
+          href="https://instagram.com/kemas.in"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="min-h-[44px] px-3.5 py-2 rounded-xl bg-pagebg hover:bg-softgreen border border-borderlight text-ink text-xs font-semibold inline-flex items-center gap-1.5 transition-colors"
+        >
+          <svg class="w-4 h-4 shrink-0 text-forest" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+          </svg>
+          <span>Instagram</span>
+        </a>
+
+        <a
+          href="https://tiktok.com/@kemas.in"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="min-h-[44px] px-3.5 py-2 rounded-xl bg-pagebg hover:bg-softgreen border border-borderlight text-ink text-xs font-semibold inline-flex items-center gap-1.5 transition-colors"
+        >
+          <svg class="w-4 h-4 shrink-0 text-forest" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+          </svg>
+          <span>TikTok</span>
+        </a>
+
+        <a
+          href="https://shopee.co.id/kemas.in"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="min-h-[44px] px-3.5 py-2 rounded-xl bg-pagebg hover:bg-softgreen border border-borderlight text-ink text-xs font-semibold inline-flex items-center gap-1.5 transition-colors"
+        >
+          <svg class="w-4 h-4 shrink-0 text-forest" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span>Shopee</span>
+        </a>
+
+        <a
+          href="https://tokopedia.com/kemas-in"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="min-h-[44px] px-3.5 py-2 rounded-xl bg-pagebg hover:bg-softgreen border border-borderlight text-ink text-xs font-semibold inline-flex items-center gap-1.5 transition-colors"
+        >
+          <svg class="w-4 h-4 shrink-0 text-forest" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7" />
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+            <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4" />
+            <path d="M2 7h20" />
+          </svg>
+          <span>Tokopedia</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       MOBILE FIXED BOTTOM NAVIGATION (< 768px)
+       ===================================================================== -->
+  <nav
+    class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-borderlight px-2 pt-1.5 mobile-bottom-nav"
+    role="tablist"
+    aria-label="Navigasi bawah mobile"
+  >
+    <div class="grid grid-cols-3 gap-1 max-w-md mx-auto">
+      <button
+        type="button"
+        role="tab"
+        data-nav="katalog"
+        aria-controls="katalog"
+        aria-selected="true"
+        onclick="switchTab('katalog')"
+        class="mobile-nav-btn min-h-[56px] rounded-xl flex flex-col items-center justify-center gap-1 text-[11px] font-bold transition-colors"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect width="7" height="7" x="3" y="3" rx="1" />
+          <rect width="7" height="7" x="14" y="3" rx="1" />
+          <rect width="7" height="7" x="14" y="14" rx="1" />
+          <rect width="7" height="7" x="3" y="14" rx="1" />
+        </svg>
+        <span>Katalog</span>
+      </button>
+
+      <button
+        type="button"
+        role="tab"
+        data-nav="estimasi"
+        aria-controls="estimasi"
+        aria-selected="false"
+        onclick="switchTab('estimasi')"
+        class="mobile-nav-btn min-h-[56px] rounded-xl flex flex-col items-center justify-center gap-1 text-[11px] font-semibold transition-colors"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect width="16" height="20" x="4" y="2" rx="2" />
+          <line x1="8" x2="16" y1="6" y2="6" />
+          <line x1="16" x2="16" y1="14" y2="18" />
+          <path d="M16 10h.01" />
+          <path d="M12 10h.01" />
+          <path d="M8 10h.01" />
+          <path d="M12 14h.01" />
+          <path d="M8 14h.01" />
+          <path d="M12 18h.01" />
+          <path d="M8 18h.01" />
+        </svg>
+        <span>Estimasi</span>
+      </button>
+
+
+      <button
+        type="button"
+        role="tab"
+        data-nav="checkout"
+        aria-controls="checkout"
+        aria-selected="false"
+        onclick="switchTab('checkout')"
+        class="mobile-nav-btn relative min-h-[56px] rounded-xl flex flex-col items-center justify-center gap-1 text-[11px] font-semibold transition-colors"
+      >
+        <span id="mobile-checkout-badge" class="hidden absolute top-1.5 right-3 w-4 h-4 rounded-full bg-forest text-white text-[10px] font-bold flex items-center justify-center">1</span>
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect width="20" height="14" x="2" y="5" rx="2" />
+          <line x1="2" x2="22" y1="10" y2="10" />
+        </svg>
+        <span>Checkout</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- =====================================================================
+       APPLICATION JAVASCRIPT
+       ===================================================================== -->
+  <script>
+    // =========================================================================
+    // CONSTANTS & CATALOG CONFIGURATION
+    // =========================================================================
+    const WA_PHONE = '62816651978';
+    const WA_DISPLAY = '0816-651-978';
+
+    // Bundling packages with dynamic material choices
+    const BUNDLES = {
+      starter: {
+        name: 'Starter Brand Kit',
+        defaultQty: 100,
+        includesLogo: true,
+        note: 'Mencakup desain logo sederhana, stiker label produk, dan thank you card. Harga dasar Rp200.000 untuk 100 set.',
+        materials: [
+          { id: 'starter_vinyl', name: 'Stiker Vinyl Waterproof + Art Carton 260gsm', unitPrice: 2000, desc: 'Tahan air dan minyak, cocok untuk minuman, sambal, atau perawatan diri.' },
+          { id: 'starter_chromo', name: 'Stiker Chromo + Art Carton 260gsm', unitPrice: 1850, desc: 'Pilihan ekonomis dengan warna cerah untuk makanan kering dan hampers.' },
+          { id: 'starter_kraft', name: 'Stiker Kraft Cokelat + Linen Texture', unitPrice: 2150, desc: 'Tampilan natural ramah lingkungan dengan tekstur kertas elegan.' },
+        ],
+      },
+      growth: {
+        name: 'Growth Packaging Kit',
+        defaultQty: 100,
+        includesLogo: false,
+        note: 'Mencakup paper bag cetak merek, hang tag, thank you card, dan packaging custom. Harga dasar Rp500.000 untuk 100 set.',
+        materials: [
+          { id: 'growth_kraft', name: 'Paper Bag Kraft 150gsm + Art Carton 310gsm', unitPrice: 5000, desc: 'Kuat, rapi, dan bernuansa natural untuk pengiriman harian.' },
+          { id: 'growth_ivory', name: 'Paper Bag Ivory Laminasi + Art Carton 310gsm', unitPrice: 5600, desc: 'Permukaan halus dengan laminasi matte untuk kesan ritel modern.' },
+          { id: 'growth_kraft200', name: 'Paper Bag Kraft Tebal 200gsm + Linen Texture', unitPrice: 5400, desc: 'Daya tahan ekstra untuk produk botol, toples, dan hampers berat.' },
+        ],
+      },
+    };
+
+    // Single items / repeat order with dynamic material choices per item
+    const ITEMS = {
+      stiker: {
+        name: 'Stiker Label Produk',
+        defaultQty: 250,
+        materials: [
+          { id: 'stk_vinyl', name: 'Vinyl Waterproof', unitPrice: 1200, desc: 'Tahan air, tidak mudah sobek, aman untuk kemasan dingin atau berminyak.' },
+          { id: 'stk_chromo', name: 'Stiker Chromo', unitPrice: 1000, desc: 'Permukaan semi-glossy yang hemat biaya untuk produk kering.' },
+          { id: 'stk_kraft', name: 'Kraft Cokelat', unitPrice: 1100, desc: 'Warna cokelat alami yang cocok untuk kopi, roti, dan kerajinan.' },
+        ],
+      },
+      thankyou: {
+        name: 'Thank You Card',
+        defaultQty: 250,
+        materials: [
+          { id: 'ty_ac260', name: 'Art Carton 260gsm', unitPrice: 1000, desc: 'Kaku dengan cetak warna tajam pada ukuran A6.' },
+          { id: 'ty_linen', name: 'Linen Texture', unitPrice: 1300, desc: 'Bertekstur garis halus sehingga terasa lebih eksklusif saat disentuh.' },
+          { id: 'ty_ac310', name: 'Art Carton 310gsm Laminasi Matte', unitPrice: 1400, desc: 'Lebih tebal dengan perlindungan anti gores matte.' },
+        ],
+      },
+      paperbag: {
+        name: 'Paper Bag Custom',
+        defaultQty: 100,
+        materials: [
+          { id: 'pb_kraft150', name: 'Kraft 150gsm', unitPrice: 3800, desc: 'Kertas kraft cokelat dengan tali kertas kuat, cocok untuk fesyen dan kuliner.' },
+          { id: 'pb_ivory', name: 'Ivory Laminasi', unitPrice: 4800, desc: 'Kertas putih tebal berlaminasi untuk tampilan bersih dan tajam.' },
+          { id: 'pb_kraft200', name: 'Kraft Tebal 200gsm', unitPrice: 4300, desc: 'Struktur kokoh untuk menopang kotak kue atau botol minuman.' },
+        ],
+      },
+      hangtag: {
+        name: 'Hang Tag',
+        defaultQty: 250,
+        materials: [
+          { id: 'ht_ac260', name: 'Art Carton 260gsm', unitPrice: 900, desc: 'Standar hang tag pakaian dan hijab, sudah termasuk lubang tali.' },
+          { id: 'ht_linen', name: 'Linen Texture', unitPrice: 1200, desc: 'Tekstur kertas halus dengan tampilan hangat.' },
+          { id: 'ht_kraft', name: 'Kraft Tebal 280gsm', unitPrice: 1100, desc: 'Nuansa natural cokelat, cocok untuk produk kriya dan busana kasual.' },
+        ],
+      },
+      mailer: {
+        name: 'Mailer Kraft Custom',
+        defaultQty: 100,
+        materials: [
+          { id: 'ml_kraft150', name: 'Kraft 150gsm', unitPrice: 3500, desc: 'Amplop pengiriman kraft cetak merek untuk produk fesyen dan aksesori.' },
+          { id: 'ml_bubble', name: 'Kraft Bubble Mailer', unitPrice: 4200, desc: 'Dilapisi bantalan udara di bagian dalam untuk perlindungan tambahan.' },
+          { id: 'ml_ivory', name: 'Ivory Laminasi Box Mailer', unitPrice: 5200, desc: 'Kotak kirim lipat rapi yang aman untuk produk perawatan diri dan hampers.' },
+        ],
+      },
+    };
+
+    // Bank VA details for simulation
+    const VA_BANKS = {
+      BCA: {
+        label: 'BCA Virtual Account',
+        prefix: '88010',
+        mobileApp: 'BCA Mobile / myBCA',
+        mobileSteps: [
+          'Buka aplikasi BCA Mobile lalu pilih menu m-Transfer.',
+          'Pilih BCA Virtual Account dan masukkan nomor VA di atas.',
+          'Periksa nama penerima KEMAS.IN STUDIO dan nominal tagihan.',
+          'Masukkan PIN m-BCA untuk menyelesaikan pembayaran.',
+        ],
+        atmSteps: [
+          'Masukkan kartu ATM BCA dan PIN Anda.',
+          'Pilih Transaksi Lainnya, Transfer, lalu ke Rekening BCA Virtual Account.',
+          'Masukkan nomor VA dan pastikan total tagihan sesuai.',
+          'Konfirmasi pembayaran dan simpan struk transaksi.',
+        ],
+      },
+      Mandiri: {
+        label: 'Mandiri Virtual Account',
+        prefix: '89012',
+        mobileApp: 'Livin by Mandiri',
+        mobileSteps: [
+          'Masuk ke aplikasi Livin by Mandiri lalu pilih menu Bayar.',
+          'Cari penyedia jasa Multipayment atau masukkan nomor VA di kolom pencarian.',
+          'Periksa detail tagihan KEMAS.IN STUDIO dan tekan Lanjutkan.',
+          'Masukkan PIN Livin untuk mengonfirmasi transaksi.',
+        ],
+        atmSteps: [
+          'Masukkan kartu ATM Mandiri dan PIN Anda.',
+          'Pilih menu Bayar/Beli lalu pilih Lainnya dan Multipayment.',
+          'Masukkan nomor Virtual Account di atas dan periksa nominal.',
+          'Tekan Ya untuk menyelesaikan pembayaran.',
+        ],
+      },
+      BRI: {
+        label: 'BRI Virtual Account',
+        prefix: '26215',
+        mobileApp: 'BRImo',
+        mobileSteps: [
+          'Buka aplikasi BRImo dan pilih menu BRIVA.',
+          'Tekan Pembayaran Baru lalu masukkan nomor Virtual Account di atas.',
+          'Pastikan nama merchant KEMAS.IN STUDIO dan nominal sudah benar.',
+          'Masukkan PIN BRImo untuk menyelesaikan pembayaran.',
+        ],
+        atmSteps: [
+          'Masukkan kartu ATM BRI dan PIN Anda.',
+          'Pilih Transaksi Lain, Pembayaran, Lainnya, lalu pilih BRIVA.',
+          'Masukkan nomor VA dan cek nominal yang muncul di layar.',
+          'Pilih Ya untuk memproses pembayaran.',
+        ],
+      },
+      BNI: {
+        label: 'BNI Virtual Account',
+        prefix: '82410',
+        mobileApp: 'wondr / BNI Mobile Banking',
+        mobileSteps: [
+          'Buka aplikasi BNI Mobile Banking lalu pilih menu Transfer.',
+          'Pilih Virtual Account Billing dan masukkan nomor VA pada kolom input baru.',
+          'Verifikasi nama tagihan KEMAS.IN STUDIO dan total nominal.',
+          'Masukkan password transaksi untuk menyelesaikan pembayaran.',
+        ],
+        atmSteps: [
+          'Masukkan kartu ATM BNI dan PIN Anda.',
+          'Pilih Menu Lain, Transfer, lalu Virtual Account Billing.',
+          'Masukkan nomor Virtual Account di atas.',
+          'Konfirmasi detail tagihan dan selesaikan transaksi.',
+        ],
+      },
+    };
+
+    // =========================================================================
+    // CENTRAL APPLICATION STATE
+    // =========================================================================
+    const state = {
+      activeTab: 'katalog',
+      orderReadyBadge: false,
+      estimator: {
+        mode: 'bundling', // 'bundling' | 'satuan'
+        bundleId: 'starter',
+        itemId: 'stiker',
+        materialId: 'starter_vinyl',
+        quantity: 100,
+        addLogo: false,
+      },
+      checkout: {
+        stage: 'form', // 'form' | 'invoice' | 'receipt'
+        shipping: 'reguler', // 'reguler' (15000) | 'kargo' (28000)
+        referralApplied: false,
+        referralCode: '',
+        paymentType: 'qris', // 'qris' | 'va'
+        vaBank: 'BCA',
+        customer: {
+          fullName: '',
+          brandName: '',
+          waNumber: '',
+          address: '',
+        },
+        invoice: {
+          orderId: '',
+          total: 0,
+          subtotalAfterVol: 0,
+          referralDiscount: 0,
+          shippingCost: 15000,
+          vaNumber: '',
+          qrisSvgString: '',
+          paidAt: '',
+        },
+      },
+    };
+
+    let countdownInterval = null;
+    let toastTimeout = null;
+
+    // =========================================================================
+    // UTILITY FUNCTIONS
+    // =========================================================================
+    function formatRupiah(value) {
+      const n = Math.max(0, Math.round(Number(value) || 0));
+      return 'Rp' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    function escapeHtml(text) {
+      return String(text || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function buildWhatsAppUrl(message) {
+      return `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(message)}`;
+    }
+
+    // =========================================================================
+    // KATALOG: ilustrasi SVG lokal + data paket
+    // Ilustrasi dibuat inline supaya selalu tampil (tanpa hotlink ke situs lain).
+    // Untuk memakai foto asli, isi field `photo` pada paket dengan URL milik
+    // Kemas.in; bila gagal dimuat, ilustrasi otomatis terlihat kembali.
+    // =========================================================================
+    const ART_OPEN = '<svg class="art-svg w-full h-full" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">';
+
+    const ART = {
+      starter: () => ART_OPEN + `
+        <g transform="rotate(-8 120 105)">
+          <rect x="62" y="40" width="112" height="128" rx="6" fill="#FFFFFF" stroke="#D3E4D8" stroke-width="2" />
+          <rect x="62" y="40" width="112" height="34" rx="6" fill="#E8F5EC" />
+          <text x="118" y="112" text-anchor="middle" font-size="13" font-weight="800" fill="#14532D">Terima kasih</text>
+          <rect x="84" y="128" width="68" height="4" rx="2" fill="#D3E4D8" />
+          <rect x="94" y="140" width="48" height="4" rx="2" fill="#D3E4D8" />
+        </g>
+        <circle cx="228" cy="76" r="40" fill="#14532D" />
+        <circle cx="228" cy="76" r="32" fill="none" stroke="#E8F5EC" stroke-width="2" />
+        <text x="228" y="81" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF">Merek</text>
+        <g transform="rotate(12 252 142)">
+          <rect x="230" y="108" width="44" height="64" rx="5" fill="#D9C3A3" stroke="#8C6239" stroke-width="2" />
+          <circle cx="252" cy="120" r="4" fill="#E8F5EC" stroke="#8C6239" stroke-width="1.5" />
+        </g>
+      </svg>`,
+      growth: () => ART_OPEN + `
+        <path d="M124 72 C124 38 186 38 186 72" fill="none" stroke="#8C6239" stroke-width="5" stroke-linecap="round" />
+        <rect x="96" y="68" width="122" height="116" rx="7" fill="#D9C3A3" />
+        <path d="M96 68 h122 l-11 18 h-100z" fill="#C4AE8E" />
+        <rect x="120" y="108" width="74" height="52" rx="5" fill="#14532D" />
+        <text x="157" y="130" text-anchor="middle" font-size="12" font-weight="800" fill="#FFFFFF">Merek</text>
+        <text x="157" y="147" text-anchor="middle" font-size="12" font-weight="800" fill="#E8F5EC">Anda</text>
+        <rect x="222" y="128" width="72" height="56" rx="5" fill="#C4AE8E" />
+        <rect x="222" y="128" width="72" height="16" rx="5" fill="#B39A74" />
+        <rect x="246" y="154" width="24" height="16" rx="3" fill="#14532D" />
+        <g transform="rotate(-12 50 120)">
+          <rect x="30" y="88" width="40" height="58" rx="5" fill="#E9D9BC" stroke="#8C6239" stroke-width="2" />
+          <circle cx="50" cy="99" r="3.5" fill="#E8F5EC" stroke="#8C6239" stroke-width="1.5" />
+        </g>
+      </svg>`,
+      repeat: () => ART_OPEN + `
+        <rect x="140" y="112" width="160" height="48" rx="7" fill="#E9D9BC" stroke="#C4AE8E" stroke-width="2" />
+        <circle cx="212" cy="136" r="12" fill="#14532D" />
+        <circle cx="244" cy="136" r="12" fill="#14532D" />
+        <circle cx="276" cy="136" r="12" fill="#14532D" />
+        <circle cx="116" cy="100" r="74" fill="#D9C3A3" />
+        <circle cx="116" cy="100" r="74" fill="none" stroke="#8C6239" stroke-width="2.5" />
+        <circle cx="116" cy="100" r="50" fill="none" stroke="#C4AE8E" stroke-width="2" />
+        <circle cx="116" cy="100" r="26" fill="#E8F5EC" stroke="#8C6239" stroke-width="2.5" />
+      </svg>`,
+      mailer: () => ART_OPEN + `
+        <rect x="52" y="52" width="216" height="124" rx="7" fill="#D9C3A3" />
+        <path d="M52 52 L160 124 L268 52 Z" fill="#C4AE8E" />
+        <rect x="170" y="128" width="84" height="34" rx="4" fill="#FFFFFF" />
+        <rect x="178" y="136" width="34" height="5" rx="2" fill="#14532D" />
+        <rect x="178" y="147" width="62" height="4" rx="2" fill="#D3E4D8" />
+        <rect x="66" y="138" width="46" height="26" rx="4" fill="#14532D" />
+        <text x="89" y="155" text-anchor="middle" font-size="11" font-weight="800" fill="#FFFFFF">Merek</text>
+      </svg>`,
+    };
+
+    const CATALOG = [
+      {
+        id: 'starter',
+        art: 'starter',
+        photo: '',
+        artLabel: 'Ilustrasi thank you card, stiker label, dan hang tag bermerek',
+        name: 'Starter Brand Kit',
+        price: 'Rp200.000',
+        tag: 'Untuk bisnis pemula',
+        featured: false,
+        desc: 'Identitas merek awal untuk usaha yang baru berjualan di lokapasar dan media sosial.',
+        bullets: [
+          'Desain logo sederhana, file siap cetak dan profil sosmed',
+          '100 pcs stiker label produk, vinyl waterproof',
+          '100 pcs thank you card, art carton 260gsm',
+        ],
+        note: 'Minimal order 1 paket (100 set). Produksi 3 sampai 5 hari kerja.',
+      },
+      {
+        id: 'growth',
+        art: 'growth',
+        photo: '',
+        artLabel: 'Ilustrasi paper bag kraft, kotak, dan hang tag bermerek',
+        name: 'Growth Packaging Kit',
+        price: 'Rp500.000',
+        tag: 'Untuk pesanan rutin',
+        featured: true,
+        desc: 'Perlengkapan kirim lengkap untuk usaha dengan transaksi harian, supaya semua kemasan tampil seragam.',
+        bullets: [
+          '100 pcs paper bag cetak merek, kraft 150gsm',
+          '100 pcs hang tag dan 100 pcs thank you card',
+          'Packaging custom dalam warna identitas merek',
+        ],
+        note: 'Minimal order 1 paket (100 set). Diskon volume otomatis mulai 250 set.',
+      },
+      {
+        id: 'repeat',
+        art: 'repeat',
+        photo: '',
+        artLabel: 'Ilustrasi gulungan stiker label untuk cetak ulang',
+        name: 'Cetak Ulang (Repeat Order)',
+        price: 'Mulai Rp250.000',
+        tag: 'Potongan volume',
+        featured: false,
+        desc: 'Cetak ulang stiker label, thank you card, atau kemasan dengan file desain lama, tanpa biaya desain ulang.',
+        bullets: [
+          'Pilih item satuan sesuai stok yang menipis',
+          'Potongan volume 10% (min. 250 pcs) dan 15% (min. 500 pcs)',
+          'Profil warna sama dengan cetakan sebelumnya',
+        ],
+        note: 'Minimal 50 pcs per item. Paling hemat mulai 250 pcs.',
+      },
+      {
+        id: 'mailer',
+        art: 'mailer',
+        photo: '',
+        artLabel: 'Ilustrasi amplop mailer kraft bermerek',
+        name: 'Packaging Custom & Mailer',
+        price: 'Mulai Rp350.000',
+        tag: 'Siap kirim lokapasar',
+        featured: false,
+        desc: 'Mailer kraft dan dus cetak bermerek untuk melindungi paket yang dikirim lewat lokapasar.',
+        bullets: [
+          '100 pcs mailer kraft 150gsm, atau pilih bubble mailer',
+          'Cetak logo satu warna atau full color',
+          'Opsi kargo hemat untuk pesanan besar',
+        ],
+        note: 'Minimal 50 pcs per item. Disarankan 100 pcs (Rp3.500 per pcs).',
+      },
+    ];
+
+    const CHECK_ICON = '<svg class="w-4 h-4 text-forest-bright mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>';
+
+    function renderCatalog() {
+      const grid = document.getElementById('catalog-grid');
+      if (!grid) return;
+
+      grid.innerHTML = CATALOG.map((p, i) => {
+        const photo = p.photo
+          ? `<img src="${escapeHtml(p.photo)}" alt="" width="640" height="400" loading="lazy" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()" />`
+          : '';
+        const tagClass = p.featured
+          ? 'bg-forest text-white'
+          : 'bg-white text-forest border border-borderlight';
+        return `
+          <article class="reveal h-full" style="--i:${i}">
+            <div class="card-lift h-full flex flex-col bg-white ${p.featured ? 'border-2 border-forest' : 'border border-borderlight'} rounded-2xl overflow-hidden">
+              <div class="relative aspect-[8/5] bg-softgreen border-b border-borderlight overflow-hidden" role="img" aria-label="${escapeHtml(p.artLabel)}">
+                ${ART[p.art]()}
+                ${photo}
+                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg ${tagClass} text-xs font-bold">${escapeHtml(p.tag)}</span>
+              </div>
+              <div class="p-5 flex-1 flex flex-col gap-3">
+                <div>
+                  <h3 class="text-base font-bold text-ink">${escapeHtml(p.name)}</h3>
+                  <p class="mt-0.5 text-xl font-extrabold text-forest">${escapeHtml(p.price)}</p>
+                </div>
+                <p class="text-sm text-ink-muted leading-relaxed">${escapeHtml(p.desc)}</p>
+                <ul class="space-y-2 text-sm text-ink">
+                  ${p.bullets.map((b) => `<li class="flex items-start gap-2">${CHECK_ICON}<span>${escapeHtml(b)}</span></li>`).join('')}
+                </ul>
+                <p class="text-xs font-medium text-ink-muted mt-auto pt-1">${escapeHtml(p.note)}</p>
+              </div>
+              <div class="p-5 pt-0 grid grid-cols-1 gap-2.5">
+                <button type="button" onclick="loadFromCatalog('${p.id}', 'estimasi')" class="min-h-[44px] px-4 py-2.5 rounded-xl bg-softgreen hover:bg-borderlight border border-borderinput text-forest text-sm font-semibold">
+                  Hitung biaya
+                </button>
+                <button type="button" onclick="loadFromCatalog('${p.id}', 'checkout')" class="min-h-[44px] px-4 py-2.5 rounded-xl bg-forest hover:bg-forest-hover text-white text-sm font-semibold">
+                  Pesan sekarang
+                </button>
+              </div>
+            </div>
+          </article>`;
+      }).join('');
+    }
+
+    // =========================================================================
+    // MOTION: reveal saat tergulir, header, tombol jeda
+    // =========================================================================
+    let revealObserver = null;
+
+    function observeReveals() {
+      const pending = document.querySelectorAll('.reveal:not(.is-visible)');
+      if (!('IntersectionObserver' in window)) {
+        pending.forEach((el) => el.classList.add('is-visible'));
+        return;
+      }
+      if (!revealObserver) {
+        revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      }
+      pending.forEach((el) => revealObserver.observe(el));
+    }
+
+    function replayKatalogReveal() {
+      document.querySelectorAll('#katalog .reveal').forEach((el) => el.classList.remove('is-visible'));
+      requestAnimationFrame(observeReveals);
+    }
+
+    function toggleMotion() {
+      const root = document.documentElement;
+      const paused = root.getAttribute('data-motion') === 'paused';
+      if (paused) {
+        root.removeAttribute('data-motion');
+      } else {
+        root.setAttribute('data-motion', 'paused');
+      }
+      const btn = document.getElementById('motion-toggle');
+      const icon = document.getElementById('motion-icon');
+      btn.setAttribute('aria-pressed', paused ? 'false' : 'true');
+      btn.setAttribute('aria-label', paused ? 'Jeda animasi' : 'Putar animasi');
+      icon.innerHTML = paused
+        ? '<rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" />'
+        : '<path d="M8 5v14l11-7z" />';
+      showToast(paused ? 'Animasi berulang diputar kembali.' : 'Animasi berulang dijeda.');
+    }
+
+    window.addEventListener('scroll', () => {
+      document.querySelector('header').classList.toggle('header-scrolled', window.scrollY > 8);
+    }, { passive: true });
+
+    function showToast(msg) {
+      const box = document.getElementById('toast-container');
+      const txt = document.getElementById('toast-text');
+      if (!box || !txt) return;
+      txt.textContent = msg;
+      box.classList.remove('hidden');
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        box.classList.add('hidden');
+      }, 3200);
+    }
+
+    // Iframe-safe clipboard copy using document.execCommand('copy')
+    function copyTextToClipboard(text) {
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      temp.setAttribute('readonly', '');
+      temp.style.position = 'fixed';
+      temp.style.top = '-9999px';
+      temp.style.left = '-9999px';
+      document.body.appendChild(temp);
+      temp.select();
+      temp.setSelectionRange(0, text.length);
+      let ok = false;
+      try {
+        ok = document.execCommand('copy');
+      } catch (e) {
+        ok = false;
+      }
+      document.body.removeChild(temp);
+      return ok;
+    }
+
+    // =========================================================================
+    // PRICING ENGINE (dipakai bersama oleh Katalog, Estimasi, dan Checkout)
+    // =========================================================================
+    function getActiveMaterialList() {
+      if (state.estimator.mode === 'bundling') {
+        return BUNDLES[state.estimator.bundleId].materials;
+      }
+      return ITEMS[state.estimator.itemId].materials;
+    }
+
+    function getSelectedMaterial() {
+      const list = getActiveMaterialList();
+      return list.find((m) => m.id === state.estimator.materialId) || list[0];
+    }
+
+    function calculateEstimate() {
+      const est = state.estimator;
+      const qty = Math.max(25, parseInt(est.quantity, 10) || 25);
+      const mat = getSelectedMaterial();
+      const itemName = est.mode === 'bundling' ? BUNDLES[est.bundleId].name : ITEMS[est.itemId].name;
+      const includesLogo = est.mode === 'bundling' && BUNDLES[est.bundleId].includesLogo;
+
+      const printSubtotal = mat.unitPrice * qty;
+      const logoAddonCost = (!includesLogo && est.addLogo) ? 75000 : 0;
+
+      let discountRate = 0;
+      if (qty >= 500) {
+        discountRate = 0.15;
+      } else if (qty >= 250) {
+        discountRate = 0.10;
+      }
+
+      const discountAmount = Math.round(printSubtotal * discountRate);
+      const total = printSubtotal - discountAmount + logoAddonCost;
+      const unitCost = Math.round(total / qty);
+
+      return {
+        itemName,
+        materialName: mat.name,
+        materialDesc: mat.desc,
+        qty,
+        includesLogo,
+        printSubtotal,
+        logoAddonCost,
+        discountRate,
+        discountAmount,
+        total,
+        unitCost,
+      };
+    }
+
+    function updateOrderBadges() {
+      const desktopBadge = document.getElementById('desktop-checkout-badge');
+      const mobileBadge = document.getElementById('mobile-checkout-badge');
+      if (state.orderReadyBadge) {
+        desktopBadge.classList.remove('hidden');
+        mobileBadge.classList.remove('hidden');
+      } else {
+        desktopBadge.classList.add('hidden');
+        mobileBadge.classList.add('hidden');
+      }
+    }
+
+    // =========================================================================
+    // TAB NAVIGATION CONTROLLER
+    // =========================================================================
+    function switchTab(tabId) {
+      state.activeTab = tabId;
+
+      document.querySelectorAll('.tab-view').forEach((sec) => {
+        const isActive = sec.id === tabId;
+        sec.classList.toggle('hidden', !isActive);
+        sec.classList.remove('view-enter');
+        // Katalog memakai reveal per blok; halaman lain memakai transisi masuk berurutan.
+        if (isActive && tabId !== 'katalog') {
+          void sec.offsetWidth;
+          sec.classList.add('view-enter');
+        }
+      });
+      if (tabId === 'katalog') replayKatalogReveal();
+
+      // Desktop nav states
+      document.querySelectorAll('.desktop-nav-btn').forEach((btn) => {
+        const isActive = btn.dataset.nav === tabId;
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        if (isActive) {
+          btn.className = 'desktop-nav-btn min-h-[44px] px-4 rounded-xl text-sm font-bold transition-colors bg-softgreen text-forest inline-flex items-center gap-2';
+        } else {
+          btn.className = 'desktop-nav-btn min-h-[44px] px-4 rounded-xl text-sm font-semibold transition-colors text-ink-muted hover:bg-pagebg hover:text-ink inline-flex items-center gap-2';
+        }
+      });
+
+      // Mobile bottom nav states
+      document.querySelectorAll('.mobile-nav-btn').forEach((btn) => {
+        const isActive = btn.dataset.nav === tabId;
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        if (isActive) {
+          btn.className = 'mobile-nav-btn relative min-h-[56px] rounded-xl flex flex-col items-center justify-center gap-1 text-[11px] font-bold transition-colors bg-softgreen text-forest';
+        } else {
+          btn.className = 'mobile-nav-btn relative min-h-[56px] rounded-xl flex flex-col items-center justify-center gap-1 text-[11px] font-semibold transition-colors text-ink-muted hover:text-ink';
+        }
+      });
+
+      if (tabId === 'estimasi') {
+        renderEstimator();
+      } else if (tabId === 'checkout') {
+        renderCheckoutSummary();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // =========================================================================
+    // VIEW 1 ACTIONS: KATALOG -> ESTIMASI OR CHECKOUT
+    // =========================================================================
+    function loadFromCatalog(key, destination) {
+      state.orderReadyBadge = true;
+      updateOrderBadges();
+
+      if (key === 'starter') {
+        state.estimator.mode = 'bundling';
+        state.estimator.bundleId = 'starter';
+        state.estimator.materialId = BUNDLES.starter.materials[0].id;
+        state.estimator.quantity = 100;
+        state.estimator.addLogo = false;
+      } else if (key === 'growth') {
+        state.estimator.mode = 'bundling';
+        state.estimator.bundleId = 'growth';
+        state.estimator.materialId = BUNDLES.growth.materials[0].id;
+        state.estimator.quantity = 100;
+        state.estimator.addLogo = false;
+      } else if (key === 'repeat') {
+        state.estimator.mode = 'satuan';
+        state.estimator.itemId = 'stiker';
+        state.estimator.materialId = ITEMS.stiker.materials[0].id;
+        state.estimator.quantity = 250;
+        state.estimator.addLogo = false;
+      } else if (key === 'mailer') {
+        state.estimator.mode = 'satuan';
+        state.estimator.itemId = 'mailer';
+        state.estimator.materialId = ITEMS.mailer.materials[0].id;
+        state.estimator.quantity = 100;
+        state.estimator.addLogo = false;
+      }
+
+      // Reset checkout back to form stage when loading a new package
+      if (state.checkout.stage !== 'form') {
+        stopCountdown();
+        state.checkout.stage = 'form';
+        showCheckoutStage('form');
+      }
+
+      renderEstimator();
+      switchTab(destination);
+
+      if (destination === 'estimasi') {
+        showToast('Paket dimuat ke kalkulator. Anda dapat mengubah bahan atau jumlah.');
+      } else {
+        showToast('Paket dimuat ke Checkout. Lengkapi data pengiriman dan pilih pembayaran.');
+      }
+    }
+
+    // =========================================================================
+    // VIEW 2 ACTIONS: KALKULATOR ESTIMASI
+    // =========================================================================
+    function setEstimatorMode(mode) {
+      state.estimator.mode = mode;
+      const list = getActiveMaterialList();
+      state.estimator.materialId = list[0].id;
+      if (mode === 'bundling') {
+        state.estimator.quantity = BUNDLES[state.estimator.bundleId].defaultQty;
+        if (BUNDLES[state.estimator.bundleId].includesLogo) {
+          state.estimator.addLogo = false;
+        }
+      } else {
+        state.estimator.quantity = ITEMS[state.estimator.itemId].defaultQty;
+      }
+      renderEstimator();
+    }
+
+    function handleBundleSelect(bundleId) {
+      state.estimator.bundleId = bundleId;
+      state.estimator.materialId = BUNDLES[bundleId].materials[0].id;
+      state.estimator.quantity = BUNDLES[bundleId].defaultQty;
+      if (BUNDLES[bundleId].includesLogo) {
+        state.estimator.addLogo = false;
+      }
+      renderEstimator();
+    }
+
+    function handleItemSelect(itemId) {
+      state.estimator.itemId = itemId;
+      state.estimator.materialId = ITEMS[itemId].materials[0].id;
+      state.estimator.quantity = ITEMS[itemId].defaultQty;
+      renderEstimator();
+    }
+
+    function handleMaterialSelect(matId) {
+      state.estimator.materialId = matId;
+      renderEstimator();
+    }
+
+    function setEstimatorQty(qty) {
+      state.estimator.quantity = qty;
+      renderEstimator();
+    }
+
+    function handleQtyInput(val) {
+      const num = parseInt(val, 10);
+      if (!isNaN(num) && num > 0) {
+        state.estimator.quantity = num;
+        updateEstimatorReadouts();
+        updateQtyButtonStyles();
+      }
+    }
+
+    function handleLogoAddon(checked) {
+      state.estimator.addLogo = checked;
+      updateEstimatorReadouts();
+    }
+
+    function renderEstimator() {
+      const est = state.estimator;
+
+      // Mode buttons
+      const btnBundling = document.getElementById('est-mode-bundling');
+      const btnSatuan = document.getElementById('est-mode-satuan');
+      if (est.mode === 'bundling') {
+        btnBundling.className = 'min-h-[52px] px-4 py-3 rounded-xl border-2 border-forest bg-softgreen text-left transition-colors';
+        btnSatuan.className = 'min-h-[52px] px-4 py-3 rounded-xl border border-borderlight bg-white hover:border-borderinput text-left transition-colors';
+      } else {
+        btnSatuan.className = 'min-h-[52px] px-4 py-3 rounded-xl border-2 border-forest bg-softgreen text-left transition-colors';
+        btnBundling.className = 'min-h-[52px] px-4 py-3 rounded-xl border border-borderlight bg-white hover:border-borderinput text-left transition-colors';
+      }
+
+      document.getElementById('est-bundling-wrap').classList.toggle('hidden', est.mode !== 'bundling');
+      document.getElementById('est-satuan-wrap').classList.toggle('hidden', est.mode !== 'satuan');
+
+      document.getElementById('est-select-bundle').value = est.bundleId;
+      document.getElementById('est-bundle-note').textContent = BUNDLES[est.bundleId].note;
+      document.getElementById('est-select-item').value = est.itemId;
+
+      // Dynamic materials dropdown
+      const matList = getActiveMaterialList();
+      const matSelect = document.getElementById('est-select-material');
+      matSelect.innerHTML = matList.map((m) =>
+        `<option value="${m.id}">${escapeHtml(m.name)} (${formatRupiah(m.unitPrice)} / pcs)</option>`
+      ).join('');
+      const selectedMat = getSelectedMaterial();
+      state.estimator.materialId = selectedMat.id;
+      matSelect.value = selectedMat.id;
+      document.getElementById('est-material-desc').textContent = selectedMat.desc;
+
+      // Quantity input
+      document.getElementById('est-qty-input').value = est.quantity;
+      updateQtyButtonStyles();
+
+      // Logo add-on state (automatically waived for Starter Brand Kit)
+      const includesLogo = est.mode === 'bundling' && BUNDLES[est.bundleId].includesLogo;
+      const addonCheckbox = document.getElementById('est-logo-addon');
+      const addonTitle = document.getElementById('est-logo-addon-title');
+      const addonDesc = document.getElementById('est-logo-addon-desc');
+
+      if (includesLogo) {
+        addonCheckbox.checked = true;
+        addonCheckbox.disabled = true;
+        addonTitle.textContent = 'Desain Logo Baru (Sudah Termasuk di Starter Brand Kit)';
+        addonDesc.textContent = 'Biaya desain logo Rp0 karena paket Starter sudah mencakup pembuatan logo sederhana.';
+      } else {
+        addonCheckbox.disabled = false;
+        addonCheckbox.checked = est.addLogo;
+        addonTitle.textContent = 'Tambah Jasa Desain Logo Baru (+Rp75.000)';
+        addonDesc.textContent = 'Termasuk 2 konsep logo awal dan file master siap cetak.';
+      }
+
+      updateEstimatorReadouts();
+    }
+
+    function updateQtyButtonStyles() {
+      const current = parseInt(state.estimator.quantity, 10);
+      document.querySelectorAll('.qty-btn').forEach((btn) => {
+        const val = parseInt(btn.dataset.qty, 10);
+        if (val === current) {
+          btn.className = 'qty-btn min-h-[44px] rounded-xl border-2 border-forest bg-softgreen text-forest text-xs sm:text-sm font-bold transition-colors';
+        } else {
+          btn.className = 'qty-btn min-h-[44px] rounded-xl border border-borderlight bg-white hover:border-borderinput text-ink text-xs sm:text-sm font-semibold transition-colors';
+        }
+      });
+    }
+
+    function updateEstimatorReadouts() {
+      const calc = calculateEstimate();
+
+      document.getElementById('est-summary-title').textContent = calc.itemName;
+      document.getElementById('est-summary-meta').textContent = `Bahan: ${calc.materialName} | ${calc.qty} pcs`;
+      document.getElementById('est-subtotal').textContent = formatRupiah(calc.printSubtotal);
+
+      const addonRow = document.getElementById('est-addon-row');
+      if (calc.logoAddonCost > 0) {
+        addonRow.classList.remove('hidden');
+        addonRow.classList.add('flex');
+      } else {
+        addonRow.classList.add('hidden');
+        addonRow.classList.remove('flex');
+      }
+
+      const discRow = document.getElementById('est-discount-row');
+      const volBadge = document.getElementById('est-volume-badge');
+      if (calc.discountAmount > 0) {
+        const pct = Math.round(calc.discountRate * 100);
+        document.getElementById('est-discount-label').textContent = `Potongan Volume (${pct}%)`;
+        document.getElementById('est-discount-val').textContent = '-' + formatRupiah(calc.discountAmount);
+        discRow.classList.remove('hidden');
+        discRow.classList.add('flex');
+        volBadge.textContent = `Diskon Volume ${pct}% Aktif`;
+        volBadge.classList.remove('hidden');
+      } else {
+        discRow.classList.add('hidden');
+        discRow.classList.remove('flex');
+        volBadge.classList.add('hidden');
+      }
+
+      document.getElementById('est-total').textContent = formatRupiah(calc.total);
+      document.getElementById('est-unit-cost').textContent = `${formatRupiah(calc.unitCost)} / pcs`;
+
+      // Update direct WA inquiry link with exact configured specs
+      const addonInfo = calc.logoAddonCost > 0 ? '\n- Tambahan: Jasa Desain Logo Baru (+Rp75.000)' : '';
+      const waMsg = [
+        'Halo Kemas.in, saya ingin menanyakan detail bahan dan estimasi cetak berikut:',
+        '',
+        `- Pilihan: ${calc.itemName}`,
+        `- Bahan: ${calc.materialName}`,
+        `- Jumlah: ${calc.qty} pcs${addonInfo}`,
+        `- Estimasi Total: ${formatRupiah(calc.total)} (${formatRupiah(calc.unitCost)} / pcs)`,
+        '',
+        'Apakah bahan ini tersedia dan berapa estimasi waktu pengerjaannya?',
+      ].join('\n');
+      document.getElementById('est-wa-link').href = buildWhatsAppUrl(waMsg);
+    }
+
+    function goToCheckoutFromEstimator() {
+      state.orderReadyBadge = true;
+      updateOrderBadges();
+      if (state.checkout.stage !== 'form') {
+        stopCountdown();
+        state.checkout.stage = 'form';
+        showCheckoutStage('form');
+      }
+      switchTab('checkout');
+      showToast('Estimasi berhasil diteruskan ke halaman Checkout.');
+    }
+
+    // =========================================================================
+    // VIEW 4 ACTIONS: CHECKOUT, QRIS SVG GENERATOR & VA BANK SIMULATION
+    // =========================================================================
+    function getCheckoutPricing() {
+      const calc = calculateEstimate();
+      const shippingCost = state.checkout.shipping === 'kargo' ? 28000 : 15000;
+      const shippingLabel = state.checkout.shipping === 'kargo'
+        ? 'Ongkir Kargo Hemat'
+        : 'Ongkir Reguler (JNE / J&T)';
+      const referralDiscount = state.checkout.referralApplied ? Math.round(calc.total * 0.10) : 0;
+      const grandTotal = Math.max(0, calc.total - referralDiscount + shippingCost);
+
+      return {
+        calc,
+        shippingCost,
+        shippingLabel,
+        referralDiscount,
+        grandTotal,
+      };
+    }
+
+    function renderCheckoutSummary() {
+      const p = getCheckoutPricing();
+
+      const addonNote = p.calc.logoAddonCost > 0 ? ' + Desain Logo' : '';
+      document.getElementById('co-summary-item').textContent = `${p.calc.itemName}${addonNote}`;
+      document.getElementById('co-summary-spec').textContent = `${p.calc.qty} pcs | ${p.calc.materialName}`;
+      document.getElementById('co-subtotal').textContent = formatRupiah(p.calc.printSubtotal + p.calc.logoAddonCost);
+
+      // Volume discount row
+      const volRow = document.getElementById('co-vol-disc-row');
+      if (p.calc.discountAmount > 0) {
+        document.getElementById('co-vol-disc-label').textContent = `Potongan Volume (${Math.round(p.calc.discountRate * 100)}%)`;
+        document.getElementById('co-vol-disc-val').textContent = '-' + formatRupiah(p.calc.discountAmount);
+        volRow.classList.remove('hidden');
+        volRow.classList.add('flex');
+      } else {
+        volRow.classList.add('hidden');
+        volRow.classList.remove('flex');
+      }
+
+      // Referral discount row
+      const refRow = document.getElementById('co-ref-disc-row');
+      if (p.referralDiscount > 0) {
+        document.getElementById('co-ref-disc-val').textContent = '-' + formatRupiah(p.referralDiscount);
+        refRow.classList.remove('hidden');
+        refRow.classList.add('flex');
+      } else {
+        refRow.classList.add('hidden');
+        refRow.classList.remove('flex');
+      }
+
+      document.getElementById('co-ship-label').textContent = p.shippingLabel;
+      document.getElementById('co-ship-val').textContent = formatRupiah(p.shippingCost);
+      document.getElementById('co-grand-total').textContent = formatRupiah(p.grandTotal);
+
+      renderShippingCards();
+      renderPaymentMethodCards();
+      renderVaBankButtons();
+    }
+
+    function handleShippingChange(val) {
+      state.checkout.shipping = val;
+      renderCheckoutSummary();
+    }
+
+    function renderShippingCards() {
+      document.querySelectorAll('.ship-card').forEach((card) => {
+        const input = card.querySelector('input[type="radio"]');
+        if (input && input.checked) {
+          card.classList.add('border-forest', 'bg-softgreen');
+          card.classList.remove('border-borderlight', 'bg-white');
+        } else {
+          card.classList.remove('border-forest', 'bg-softgreen');
+          card.classList.add('border-borderlight', 'bg-white');
+        }
+      });
+    }
+
+    function handlePaymentTypeChange(type) {
+      state.checkout.paymentType = type;
+      document.getElementById('va-bank-selector').classList.toggle('hidden', type !== 'va');
+      renderPaymentMethodCards();
+      renderVaBankButtons();
+    }
+
+    function renderPaymentMethodCards() {
+      document.querySelectorAll('.pay-card').forEach((card) => {
+        const input = card.querySelector('input[type="radio"]');
+        if (input && input.checked) {
+          card.classList.add('border-forest', 'bg-softgreen');
+          card.classList.remove('border-borderlight', 'bg-white');
+        } else {
+          card.classList.remove('border-forest', 'bg-softgreen');
+          card.classList.add('border-borderlight', 'bg-white');
+        }
+      });
+    }
+
+    function selectVaBank(bankCode) {
+      state.checkout.vaBank = bankCode;
+      renderVaBankButtons();
+    }
+
+    function renderVaBankButtons() {
+      document.querySelectorAll('.bank-btn').forEach((btn) => {
+        const active = btn.dataset.bank === state.checkout.vaBank;
+        if (active) {
+          btn.className = 'bank-btn min-h-[46px] px-3 py-2 rounded-xl border-2 border-forest bg-softgreen text-forest text-xs sm:text-sm font-bold transition-colors';
+        } else {
+          btn.className = 'bank-btn min-h-[46px] px-3 py-2 rounded-xl border border-borderlight bg-white hover:border-borderinput text-ink text-xs sm:text-sm font-semibold transition-colors';
+        }
+      });
+    }
+
+    function applyReferralCode() {
+      const input = document.getElementById('co-referral');
+      const feedback = document.getElementById('co-referral-feedback');
+      const code = input.value.trim().toUpperCase();
+
+      if (!code) {
+        state.checkout.referralApplied = false;
+        state.checkout.referralCode = '';
+        feedback.textContent = 'Masukkan kode referral terlebih dahulu (contoh: UMKM10).';
+        feedback.className = 'mt-1.5 text-xs font-semibold text-errortext';
+        feedback.classList.remove('hidden');
+        renderCheckoutSummary();
+        return;
+      }
+
+      if (code === 'UMKM10') {
+        state.checkout.referralApplied = true;
+        state.checkout.referralCode = 'UMKM10';
+        feedback.textContent = 'Kode UMKM10 berhasil diterapkan: diskon referral 10% aktif.';
+        feedback.className = 'mt-1.5 text-xs font-bold text-forest';
+        feedback.classList.remove('hidden');
+        showToast('Diskon referral UMKM10 (10%) berhasil diterapkan.');
+      } else {
+        state.checkout.referralApplied = false;
+        state.checkout.referralCode = '';
+        feedback.textContent = `Kode "${code}" tidak ditemukan. Coba gunakan kode simulasi: UMKM10.`;
+        feedback.className = 'mt-1.5 text-xs font-semibold text-errortext';
+        feedback.classList.remove('hidden');
+      }
+
+      renderCheckoutSummary();
+    }
+
+    function clearFieldError(inputId, errId) {
+      const input = document.getElementById(inputId);
+      const err = document.getElementById(errId);
+      if (input) input.classList.remove('field-error');
+      if (err) err.classList.add('hidden');
+    }
+
+    function showFieldError(inputId, errId) {
+      const input = document.getElementById(inputId);
+      const err = document.getElementById(errId);
+      if (input) input.classList.add('field-error');
+      if (err) err.classList.remove('hidden');
+    }
+
+    function showCheckoutStage(stageName) {
+      state.checkout.stage = stageName;
+      document.getElementById('checkout-form-stage').classList.toggle('hidden', stageName !== 'form');
+      document.getElementById('checkout-invoice-stage').classList.toggle('hidden', stageName !== 'invoice');
+      document.getElementById('checkout-receipt-stage').classList.toggle('hidden', stageName !== 'receipt');
+    }
+
+    // Deterministic 25x25 QRIS SVG Card Generator
+    function createQrisSvgCard(orderId, totalAmount) {
+      const size = 25;
+      const matrix = Array.from({ length: size }, () => Array(size).fill(0));
+      const reserved = Array.from({ length: size }, () => Array(size).fill(false));
+
+      // Helper to stamp a 7x7 finder pattern + 1-module white separator
+      function placeFinder(r0, c0) {
+        for (let r = -1; r <= 7; r++) {
+          for (let c = -1; c <= 7; c++) {
+            const rr = r0 + r;
+            const cc = c0 + c;
+            if (rr < 0 || rr >= size || cc < 0 || cc >= size) continue;
+            reserved[rr][cc] = true;
+            if (r === -1 || r === 7 || c === -1 || c === 7) {
+              matrix[rr][cc] = 0;
+            } else if (r === 0 || r === 6 || c === 0 || c === 6) {
+              matrix[rr][cc] = 1;
+            } else if (r >= 2 && r <= 4 && c >= 2 && c <= 4) {
+              matrix[rr][cc] = 1;
+            } else {
+              matrix[rr][cc] = 0;
+            }
+          }
+        }
+      }
+
+      // Three standard QR finder patterns
+      placeFinder(0, 0);
+      placeFinder(0, size - 7);
+      placeFinder(size - 7, 0);
+
+      // 5x5 Alignment pattern at (16, 16)
+      for (let r = 0; r < 5; r++) {
+        for (let c = 0; c < 5; c++) {
+          const rr = 16 + r;
+          const cc = 16 + c;
+          reserved[rr][cc] = true;
+          if (r === 0 || r === 4 || c === 0 || c === 4 || (r === 2 && c === 2)) {
+            matrix[rr][cc] = 1;
+          } else {
+            matrix[rr][cc] = 0;
+          }
+        }
+      }
+
+      // Timing patterns along row 6 and col 6
+      for (let i = 8; i < size - 8; i++) {
+        reserved[6][i] = true;
+        matrix[6][i] = i % 2 === 0 ? 1 : 0;
+        reserved[i][6] = true;
+        matrix[i][6] = i % 2 === 0 ? 1 : 0;
+      }
+
+      // Quiet center logo box (rows 10..14, cols 9..15)
+      for (let r = 10; r <= 14; r++) {
+        for (let c = 9; c <= 15; c++) {
+          reserved[r][c] = true;
+          matrix[r][c] = 0;
+        }
+      }
+
+      // Deterministic PRNG seeded by orderId and totalAmount
+      let seed = 2166136261;
+      const seedStr = `${orderId}-${totalAmount}-KEMASIN`;
+      for (let i = 0; i < seedStr.length; i++) {
+        seed ^= seedStr.charCodeAt(i);
+        seed = Math.imul(seed, 16777619);
+      }
+      function nextBit() {
+        seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+        return (seed >>> 24) % 100 < 52 ? 1 : 0;
+      }
+
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          if (!reserved[r][c]) {
+            matrix[r][c] = nextBit();
+          }
+        }
+      }
+
+      // Build SVG module rects
+      const cell = 8;
+      const qrOriginX = 70;
+      const qrOriginY = 128;
+      let rects = '';
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          if (matrix[r][c] === 1) {
+            rects += `<rect x="${qrOriginX + c * cell}" y="${qrOriginY + r * cell}" width="${cell}" height="${cell}" fill="#111111"/>`;
+          }
+        }
+      }
+
+      const formattedTotal = formatRupiah(totalAmount);
+
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="340" height="432" viewBox="0 0 340 432" role="img" aria-label="Kode QRIS simulasi untuk KEMAS.IN CUSTOM PACKAGING sebesar ${formattedTotal}" style="max-width:100%;height:auto;border-radius:16px;border:1.5px solid #D3E4D8;background:#FFFFFF;">
+        <rect width="340" height="432" rx="16" fill="#FFFFFF"/>
+        <rect x="0" y="0" width="340" height="58" rx="16" fill="#14532D"/>
+        <rect x="0" y="42" width="340" height="16" fill="#14532D"/>
+        <text x="20" y="34" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="22" font-weight="800" fill="#FFFFFF" letter-spacing="0.04em">QRIS</text>
+        <text x="86" y="27" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="9.5" font-weight="600" fill="#E8F5EC">QR Code Standar</text>
+        <text x="86" y="40" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="9.5" font-weight="600" fill="#E8F5EC">Pembayaran Nasional</text>
+        <rect x="234" y="18" width="88" height="22" rx="6" fill="#FFFFFF"/>
+        <text x="278" y="33" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="9.5" font-weight="800" fill="#14532D" text-anchor="middle">SIMULASI</text>
+
+        <text x="170" y="84" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="13.5" font-weight="800" fill="#112218" text-anchor="middle">KEMAS.IN CUSTOM PACKAGING</text>
+        <text x="170" y="102" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#3E5647" text-anchor="middle">NMID: ID1026000816179 (Simulasi)</text>
+
+        <rect x="58" y="116" width="224" height="224" rx="10" fill="#FFFFFF" stroke="#D3E4D8" stroke-width="1.5"/>
+        ${rects}
+
+        <rect x="${qrOriginX + 9 * cell - 2}" y="${qrOriginY + 10 * cell - 2}" width="${7 * cell + 4}" height="${5 * cell + 4}" rx="6" fill="#FFFFFF" stroke="#14532D" stroke-width="1.5"/>
+        <text x="${qrOriginX + 12.5 * cell}" y="${qrOriginY + 12.9 * cell}" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="11" font-weight="800" fill="#14532D" text-anchor="middle">Kemas.in</text>
+
+        <line x1="24" y1="356" x2="316" y2="356" stroke="#D3E4D8" stroke-width="1"/>
+        <text x="170" y="378" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#3E5647" text-anchor="middle">Total Tagihan Pre-Order (${orderId})</text>
+        <text x="170" y="405" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="21" font-weight="800" fill="#14532D" text-anchor="middle">${formattedTotal}</text>
+      </svg>`;
+    }
+
+    function stopCountdown() {
+      if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+      }
+    }
+
+    function startCountdown(secondsTotal, showHours) {
+      stopCountdown();
+      let remaining = secondsTotal;
+      const el = document.getElementById('inv-countdown');
+
+      function renderTick() {
+        const hrs = Math.floor(remaining / 3600);
+        const mins = Math.floor((remaining % 3600) / 60);
+        const secs = remaining % 60;
+        const pad = (n) => String(n).padStart(2, '0');
+        el.textContent = showHours
+          ? `${pad(hrs)}:${pad(mins)}:${pad(secs)}`
+          : `${pad(mins)}:${pad(secs)}`;
+      }
+
+      renderTick();
+      countdownInterval = setInterval(() => {
+        if (remaining > 0) {
+          remaining -= 1;
+          renderTick();
+        } else {
+          stopCountdown();
+        }
+      }, 1000);
+    }
+
+    function generatePaymentCode(event) {
+      event.preventDefault();
+
+      const fullName = document.getElementById('co-fullname').value.trim();
+      const brandName = document.getElementById('co-brand').value.trim();
+      const waNumber = document.getElementById('co-wa').value.trim();
+      const address = document.getElementById('co-city').value.trim();
+
+      let firstInvalid = null;
+
+      if (!fullName) {
+        showFieldError('co-fullname', 'err-co-fullname');
+        firstInvalid = firstInvalid || document.getElementById('co-fullname');
+      } else {
+        clearFieldError('co-fullname', 'err-co-fullname');
+      }
+
+      if (!brandName) {
+        showFieldError('co-brand', 'err-co-brand');
+        firstInvalid = firstInvalid || document.getElementById('co-brand');
+      } else {
+        clearFieldError('co-brand', 'err-co-brand');
+      }
+
+      const digitsOnly = waNumber.replace(/\D/g, '');
+      if (digitsOnly.length < 9) {
+        showFieldError('co-wa', 'err-co-wa');
+        firstInvalid = firstInvalid || document.getElementById('co-wa');
+      } else {
+        clearFieldError('co-wa', 'err-co-wa');
+      }
+
+      if (!address) {
+        showFieldError('co-city', 'err-co-city');
+        firstInvalid = firstInvalid || document.getElementById('co-city');
+      } else {
+        clearFieldError('co-city', 'err-co-city');
+      }
+
+      if (firstInvalid) {
+        firstInvalid.focus();
+        return;
+      }
+
+      // Simpan data pelanggan
+      state.checkout.customer = { fullName, brandName, waNumber, address };
+
+      const p = getCheckoutPricing();
+      const randomNum = Math.floor(1000 + Math.random() * 8999);
+      const orderId = `KMS-2026-${randomNum}`;
+
+      state.checkout.invoice = {
+        orderId,
+        total: p.grandTotal,
+        subtotalAfterVol: p.calc.total,
+        referralDiscount: p.referralDiscount,
+        shippingCost: p.shippingCost,
+        vaNumber: '',
+        qrisSvgString: '',
+        paidAt: '',
+      };
+
+      document.getElementById('inv-order-id').textContent = orderId;
+      document.getElementById('inv-total-amount').textContent = formatRupiah(p.grandTotal);
+      const discText = p.referralDiscount > 0 ? ` - Diskon ${formatRupiah(p.referralDiscount)}` : '';
+      document.getElementById('inv-breakdown-note').textContent =
+        `Pesanan ${formatRupiah(p.calc.total)}${discText} + Ongkir ${formatRupiah(p.shippingCost)} + Kode Unik Rp0`;
+
+      const qrisPanel = document.getElementById('inv-qris-panel');
+      const vaPanel = document.getElementById('inv-va-panel');
+
+      if (state.checkout.paymentType === 'qris') {
+        document.getElementById('inv-title').textContent = 'Selesaikan Pembayaran via QRIS';
+        qrisPanel.classList.remove('hidden');
+        vaPanel.classList.add('hidden');
+
+        const svgMarkup = createQrisSvgCard(orderId, p.grandTotal);
+        state.checkout.invoice.qrisSvgString = svgMarkup;
+        document.getElementById('qris-svg-mount').innerHTML = svgMarkup;
+        startCountdown(14 * 60 + 59, false);
+      } else {
+        const bank = VA_BANKS[state.checkout.vaBank] || VA_BANKS.BCA;
+        const formattedVa = `${bank.prefix} 8166 519 78`;
+        state.checkout.invoice.vaNumber = formattedVa;
+
+        document.getElementById('inv-title').textContent = `Selesaikan Pembayaran via ${bank.label}`;
+        qrisPanel.classList.add('hidden');
+        vaPanel.classList.remove('hidden');
+
+        document.getElementById('inv-va-bank-name').textContent = bank.label;
+        document.getElementById('inv-va-number').textContent = formattedVa;
+        document.getElementById('va-copy-feedback').classList.add('hidden');
+
+        document.getElementById('va-steps-mobile').innerHTML = bank.mobileSteps.map((s) => `<li>${escapeHtml(s)}</li>`).join('');
+        document.getElementById('va-steps-atm').innerHTML = bank.atmSteps.map((s) => `<li>${escapeHtml(s)}</li>`).join('');
+
+        startCountdown(23 * 3600 + 59 * 60 + 59, true);
+      }
+
+      showCheckoutStage('invoice');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showToast('Kode pembayaran simulasi berhasil dibuat.');
+    }
+
+    function downloadQrisSvg() {
+      const svgStr = state.checkout.invoice.qrisSvgString;
+      if (!svgStr) return;
+      try {
+        const blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `QRIS-Kemas-in-${state.checkout.invoice.orderId}.svg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        showToast('Gambar QRIS (Simulasi) berhasil diunduh.');
+      } catch (e) {
+        showToast('Unduhan otomatis dibatasi browser ini. Silakan tangkap layar QRIS.');
+      }
+    }
+
+    function copyInvoiceAmount() {
+      const rawAmount = String(state.checkout.invoice.total);
+      const ok = copyTextToClipboard(rawAmount);
+      showToast(ok ? `Nominal ${formatRupiah(state.checkout.invoice.total)} disalin.` : 'Salin nominal secara manual.');
+    }
+
+    function copyVaNumber() {
+      const cleanVa = state.checkout.invoice.vaNumber.replace(/\s+/g, '');
+      const ok = copyTextToClipboard(cleanVa);
+      const fb = document.getElementById('va-copy-feedback');
+      fb.textContent = ok
+        ? `Nomor VA ${cleanVa} berhasil disalin ke clipboard.`
+        : 'Silakan salin nomor VA secara manual.';
+      fb.classList.remove('hidden');
+      showToast(ok ? 'Nomor Virtual Account disalin.' : 'Salin nomor VA secara manual.');
+    }
+
+    function backToCheckoutForm() {
+      stopCountdown();
+      showCheckoutStage('form');
+    }
+
+    function confirmSimulatedPayment() {
+      stopCountdown();
+
+      const now = new Date();
+      const pad = (n) => String(n).padStart(2, '0');
+      const timestamp = `${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()}, ${pad(now.getHours())}:${pad(now.getMinutes())} WIB`;
+      state.checkout.invoice.paidAt = timestamp;
+
+      const calc = calculateEstimate();
+      const methodLabel = state.checkout.paymentType === 'qris'
+        ? 'QRIS (Simulasi)'
+        : `${VA_BANKS[state.checkout.vaBank].label} (Simulasi)`;
+      const addonText = calc.logoAddonCost > 0 ? ' + Desain Logo' : '';
+      const packageLabel = `${calc.itemName}${addonText} (${calc.qty} pcs, ${calc.materialName})`;
+
+      document.getElementById('rcpt-order-id').textContent = state.checkout.invoice.orderId;
+      document.getElementById('rcpt-timestamp').textContent = timestamp;
+      document.getElementById('rcpt-customer').textContent = `${state.checkout.customer.fullName} (${state.checkout.customer.brandName})`;
+      document.getElementById('rcpt-method').textContent = methodLabel;
+      document.getElementById('rcpt-package').textContent = packageLabel;
+      document.getElementById('rcpt-total').textContent = formatRupiah(state.checkout.invoice.total);
+
+      // Render 5-stage interactive order status tracker
+      const stages = [
+        { num: 1, title: 'Pembayaran Diterima', desc: 'Pembayaran pre-order terverifikasi pada ' + timestamp + '.', status: 'active' },
+        { num: 2, title: 'Brief Desain via WA', desc: 'Kirim brief merek ke WhatsApp 0816-651-978 agar desainer mulai bekerja.', status: 'upcoming' },
+        { num: 3, title: 'Persetujuan Mockup', desc: 'Anda meninjau dan menyetujui pratinjau digital sebelum cetak.', status: 'upcoming' },
+        { num: 4, title: 'Produksi di Mitra Cetak', desc: 'Pesanan masuk mesin cetak selama 3 sampai 5 hari kerja.', status: 'upcoming' },
+        { num: 5, title: 'Pengiriman Ekspedisi', desc: 'Paket dikirim ke ' + state.checkout.customer.address + ' disertai resi.', status: 'upcoming' },
+      ];
+
+      document.getElementById('receipt-tracker-list').innerHTML = stages.map((st) => {
+        const isActive = st.status === 'active';
+        return `
+          <li class="p-3.5 rounded-xl border ${isActive ? 'bg-softgreen border-forest' : 'bg-pagebg border-borderlight'} flex items-start gap-3">
+            <span class="w-7 h-7 rounded-full ${isActive ? 'bg-forest text-white' : 'bg-white border border-borderinput text-ink-muted'} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+              ${isActive
+                ? '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>'
+                : st.num}
+            </span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between gap-2">
+                <p class="text-sm font-bold ${isActive ? 'text-forest' : 'text-ink'}">${st.num}. ${escapeHtml(st.title)}</p>
+                ${isActive ? '<span class="px-2 py-0.5 rounded-md bg-forest text-white text-[10px] font-bold">Aktif</span>' : '<span class="text-[11px] font-semibold text-ink-muted">Menunggu</span>'}
+              </div>
+              <p class="text-xs text-ink-muted mt-0.5">${escapeHtml(st.desc)}</p>
+            </div>
+          </li>
+        `;
+      }).join('');
+
+      // Pre-fill Direct WA CTA with Order ID, package, total paid, and payment method
+      const waConfirmMsg = [
+        'Halo Kemas.in, saya ingin mengonfirmasi pesanan dan melanjutkan pengiriman brief desain:',
+        '',
+        `- Order ID: ${state.checkout.invoice.orderId}`,
+        `- Nama Pemesan: ${state.checkout.customer.fullName}`,
+        `- Nama Merek UMKM: ${state.checkout.customer.brandName}`,
+        `- Paket / Item: ${packageLabel}`,
+        `- Total Dibayar: ${formatRupiah(state.checkout.invoice.total)}`,
+        `- Metode Pembayaran: ${methodLabel}`,
+        `- Alamat Pengiriman: ${state.checkout.customer.address}`,
+        '',
+        'Mohon arahan untuk langkah brief desain selanjutnya. Terima kasih.',
+      ].join('\n');
+
+      document.getElementById('rcpt-wa-cta').href = buildWhatsAppUrl(waConfirmMsg);
+
+      showCheckoutStage('receipt');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showToast('Pembayaran simulasi berhasil dikonfirmasi.');
+    }
+
+    function resetCheckoutSimulation() {
+      stopCountdown();
+      state.checkout.referralApplied = false;
+      state.checkout.referralCode = '';
+      state.checkout.shipping = 'reguler';
+      state.checkout.paymentType = 'qris';
+      state.checkout.vaBank = 'BCA';
+      state.orderReadyBadge = false;
+      updateOrderBadges();
+
+      document.getElementById('checkout-form').reset();
+      document.getElementById('co-referral-feedback').classList.add('hidden');
+      document.getElementById('va-bank-selector').classList.add('hidden');
+
+      showCheckoutStage('form');
+      renderCheckoutSummary();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showToast('Checkout direset. Anda dapat membuat pesanan baru.');
+    }
+
+    // =========================================================================
+    // KEYBOARD ACCESSIBILITY (Escape closes open details/notifications)
+    // =========================================================================
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        const toast = document.getElementById('toast-container');
+        if (toast) toast.classList.add('hidden');
+        document.querySelectorAll('details[open]').forEach((d) => {
+          d.removeAttribute('open');
+        });
+      }
+    });
+
+    // =========================================================================
+    // APP INITIALIZATION
+    // =========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCatalog();
+      renderEstimator();
+      renderCheckoutSummary();
+      updateOrderBadges();
+      switchTab('katalog');
+    });
+  </script>
+</body>
+</html>
