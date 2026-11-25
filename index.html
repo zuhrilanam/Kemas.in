@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kemas.in | Branding & Kemasan untuk UMKM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{display:['"Bricolage Grotesque"','sans-serif'],sans:['"Plus Jakarta Sans"','sans-serif']},colors:{ind:{DEFAULT:'#4F46E5',dark:'#3730A3',tint:'#EEF2FF'},ink:'#0F172A'}}}}</script>
+<style>
+html{scroll-behavior:smooth}body{color:#0F172A;font-family:'Plus Jakarta Sans',sans-serif}
+button,a[href],select,summary,label,[role=button]{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}
+.lb{display:block;font-size:.85rem;font-weight:600;color:#334155;margin-bottom:.4rem}
+.mn{min-height:44px;display:flex;align-items:center;padding:0 1rem;border-radius:.6rem;font-weight:600;color:#334155}.mn:hover{background:#EEF2FF;color:#3730A3}
+.glass{background:rgba(255,255,255,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.7)}
+.glass-d{background:rgba(255,255,255,.1);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.25)}
+.lift{transition:transform .25s,box-shadow .25s}.lift:hover{transform:translateY(-4px);box-shadow:0 18px 40px -16px rgba(55,48,163,.35)}
+.chip{border:1px solid #7C8BA1;border-radius:999px;padding:.5rem 1.1rem;min-height:44px;display:inline-flex;align-items:center;font-size:.85rem;font-weight:600;background:#fff;transition:.2s}
+.chip.on,.chip:hover{background:#4F46E5;color:#fff;border-color:#4F46E5}
+.opt{min-height:44px;border:1.5px solid #7C8BA1;border-radius:.75rem;padding:.6rem 1rem;font-size:.85rem;font-weight:600;background:#fff;transition:.2s;text-align:left}
+.opt.on{border-color:#4F46E5;background:#EEF2FF;color:#3730A3}
+.modal{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s,visibility .25s}.modal.open{opacity:1;visibility:visible;pointer-events:auto}
+.modal>.box{transform:translateY(16px) scale(.98);transition:transform .3s}.modal.open>.box{transform:none}
+#drawer{transform:translateX(100%);visibility:hidden;transition:transform .35s,visibility .35s}#drawer.open{transform:none;visibility:visible}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s}.faq.open .faq-a{grid-template-rows:1fr}.faq-a>div{overflow:hidden}.faq.open .ch{transform:rotate(180deg)}
+.fld{display:block;border:1.5px solid #94A3B8;border-radius:.9rem;padding:.8rem 1rem;min-height:50px;width:100%;background:#fff;font-size:1rem;line-height:1.5;color:#0F172A;transition:border-color .2s,box-shadow .2s}textarea.fld{min-height:6rem;resize:vertical}.fld::placeholder{color:#94A3B8}.fld:focus{outline:none;border-color:#4F46E5;box-shadow:0 0 0 4px rgba(79,70,229,.18)}
+:focus-visible{outline:2px solid #4F46E5;outline-offset:2px}
+/* tombol stiker */
+.pop{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:52px;padding:0 1.6rem;border-radius:999px;font-weight:700;border:2px solid #0F172A;box-shadow:4px 4px 0 #0F172A;transition:transform .15s,box-shadow .15s,background-color .2s}
+.pop:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 #0F172A}.pop:active{transform:translate(3px,3px);box-shadow:1px 1px 0 #0F172A}
+.pop-y{background:#FDE047;color:#0F172A}.pop-y:hover{background:#FACC15}
+.pop-i{background:#4F46E5;color:#fff}.pop-i:hover{background:#4338CA}
+.pop-w{background:#0F7A40;color:#fff}.pop-w:hover{background:#0B6234}
+.pop-l{background:#fff;color:#0F172A}
+.dk{box-shadow:4px 4px 0 #A5B4FC}.dk:hover{box-shadow:6px 6px 0 #A5B4FC}.dk:active{box-shadow:1px 1px 0 #A5B4FC}
+/* liquid glass navbar */
+.lg{position:relative;isolation:isolate;background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(255,255,255,.58));backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);box-shadow:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -10px 20px -12px rgba(79,70,229,.28),0 12px 40px -14px rgba(2,6,23,.55)}
+.lg::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:linear-gradient(120deg,rgba(255,255,255,1),rgba(255,255,255,.15) 45%,rgba(165,180,252,.85));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:-1}
+.lg::after{content:'';position:absolute;top:1px;left:8%;width:45%;height:45%;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0));pointer-events:none;z-index:-1}
+.nl{display:inline-flex;align-items:center;min-height:40px;padding:0 1rem;border-radius:999px;font-weight:600;font-size:.9rem;color:#1E293B;transition:background-color .2s,color .2s}
+.nl:hover{background:rgba(79,70,229,.12);color:#3730A3}.nl.act{background:#0F172A;color:#fff}
+/* reveal saat scroll */
+.rv:not(.in){opacity:0}.rv.in{animation:up .75s cubic-bezier(.2,.8,.2,1) var(--d,0s) backwards}
+/* ticker */
+.mq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mq-t{display:flex;gap:2.5rem;width:max-content;animation:mq 32s linear infinite}.mq:hover .mq-t{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* WA */
+@keyframes ring{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.7);opacity:0}}
+.wa-ring{position:absolute;inset:0;border-radius:999px;background:#22C55E;animation:ring 1.8s ease-out infinite;z-index:-1}.wa-ring.r2{animation-delay:.9s}
+@keyframes wiggle{0%,86%,100%{transform:rotate(0)}89%{transform:rotate(-12deg)}93%{transform:rotate(10deg)}96%{transform:rotate(-6deg)}}
+.wa-ico{animation:wiggle 4s ease-in-out infinite}
+#waBubble{opacity:0;transform:translateY(10px) scale(.95);transform-origin:bottom right;pointer-events:none;transition:opacity .3s,transform .35s cubic-bezier(.2,.9,.3,1.3)}#waBubble.show{opacity:1;transform:none;pointer-events:auto}
+.tilt{transform:rotate(var(--r,-3deg))}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv:not(.in){opacity:1}}
+.hero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(ellipse 60% 50% at 75% 30%,rgba(99,102,241,.45),transparent 70%),linear-gradient(180deg,#0B1030 0%,#1B1A4F 60%,#2E2A87 100%)}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:linear-gradient(#000 35%,transparent 80%);mask-image:linear-gradient(#000 35%,transparent 80%)}
+.hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:min(18rem,55%);background:linear-gradient(180deg,rgba(248,250,252,0),rgba(248,250,252,.8) 45%,#F8FAFC 80%)}
+.hero>*{position:relative;z-index:1}
+@keyframes up{from{opacity:0;transform:translateY(22px)}}
+@keyframes drop{from{opacity:0;transform:translateY(-44px)}}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.96)}}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.up{animation:up .7s cubic-bezier(.2,.8,.2,1) var(--d,0s) both}
+.pk{animation:drop .85s cubic-bezier(.2,.9,.3,1.15) var(--d,0s) both,bob 2.2s ease-in-out calc(var(--d,0s) + .95s) 2}
+.wg{display:inline-flex;align-items:center;gap:.5rem;margin:.75rem .5rem 0 0;border-radius:1rem;padding:.6rem 1rem;font-size:.875rem;font-weight:600;color:#0F172A;background:rgba(255,255,255,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.85);box-shadow:0 14px 30px -14px rgba(2,6,23,.6);animation:pop .6s cubic-bezier(.2,.8,.2,1) var(--d,0s) both,bob 2.6s ease-in-out calc(var(--d,0s) + .8s) 2}
+.w4{flex-direction:column;align-items:stretch;gap:.15rem;width:100%;max-width:20rem}
+@media(min-width:1024px){.wg{position:absolute;margin:0}.w1{top:2%;left:0}.w2{top:11%;right:0}.w3{bottom:5%;left:0}.w4{bottom:-3%;right:0;width:17rem}}
+</style>
+</head>
+<body class="bg-white antialiased">
+
+<a href="#katalog" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg">Lewati ke katalog</a>
+<!-- NAVBAR -->
+<header id="nav" class="fixed top-3 inset-x-3 z-40">
+ <nav class="lg up rounded-full max-w-6xl mx-auto pl-5 pr-2 py-2 flex items-center gap-3 transition-shadow" style="--d:0s" aria-label="Navigasi utama">
+  <a href="#top" class="font-display font-extrabold text-xl text-ind-dark flex items-center gap-1.5"><i data-lucide="package-open" class="w-5 h-5" aria-hidden="true"></i>Kemas.in</a>
+  <div class="hidden lg:flex gap-1 mx-auto">
+   <a href="#katalog" class="nl">Katalog</a><a href="#alur" class="nl">Alur Desain</a><a href="#portofolio" class="nl">Portofolio</a><a href="#ulasan" class="nl">Ulasan</a><a href="#faq" class="nl">FAQ</a>
+  </div>
+  <div class="ml-auto lg:ml-0 flex items-center gap-1.5">
+   <button id="menuBtn" onclick="toggleMenu()" aria-expanded="false" aria-controls="mnav" class="lg:hidden min-h-[44px] px-4 rounded-full bg-white/70 border border-white text-sm font-semibold hover:bg-white">Menu</button>
+   <button onclick="openCart()" aria-label="Keranjang" class="relative w-11 h-11 grid place-items-center rounded-full bg-white/70 border border-white hover:bg-white transition"><i data-lucide="shopping-bag" class="w-5 h-5"></i><span id="badge" class="absolute -top-1 -right-1 bg-[#FDE047] text-ink border-2 border-ink text-[10px] font-extrabold rounded-full w-5 h-5 grid place-items-center">0</span></button>
+   <a href="https://wa.me/6281617917965?text=Halo%20Kemas.in%2C%20saya%20mau%20konsultasi%20desain." target="_blank" rel="noopener" class="hidden sm:flex items-center gap-1.5 bg-[#0F7A40] hover:bg-[#0B6234] text-white text-sm font-semibold rounded-full px-4 min-h-[44px] transition"><i data-lucide="message-circle" class="w-4 h-4" aria-hidden="true"></i>Chat desainer</a>
+  </div>
+ </nav>
+<div id="mnav" class="hidden lg:hidden lg rounded-3xl mt-2 max-w-6xl mx-auto p-2 flex-col"><a class="mn" href="#katalog">Katalog</a><a class="mn" href="#alur">Alur Desain</a><a class="mn" href="#portofolio">Portofolio</a><a class="mn" href="#ulasan">Ulasan</a><a class="mn" href="#faq">FAQ</a></div>
+</header>
+
+<main>
+<!-- HERO -->
+<section id="top" class="hero pt-28 sm:pt-32 pb-12 sm:pb-16 px-5">
+ <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-6 items-center">
+  <div>
+   <h1 class="up font-display font-extrabold text-[clamp(2.1rem,6vw,3.9rem)] leading-[1.05] tracking-tight text-white" style="--d:.05s">Cetak kemasan dan label brandmu dalam jumlah kecil.</h1>
+   <p class="up mt-5 text-lg text-indigo-100 max-w-xl" style="--d:.15s">Pilih stiker, label, thank you card, paper bag, atau box. Atur ukuran dan bahan, lihat harganya, lalu bayar tanpa daftar akun. Desainnya kamu bahas langsung dengan kami lewat WhatsApp.</p>
+   <div class="up mt-8 flex flex-wrap gap-3" style="--d:.25s">
+    <a href="#katalog" class="pop pop-y dk">Cek katalog & harga<i data-lucide="arrow-down" class="w-4 h-4" aria-hidden="true"></i></a>
+    <a href="https://wa.me/6281617917965?text=Halo%20Kemas.in%2C%20saya%20mau%20konsultasi%20desain." target="_blank" rel="noopener" class="pop pop-w dk"><i data-lucide="message-circle" class="w-4 h-4" aria-hidden="true"></i>Chat desainer, gratis</a>
+   </div>
+   <p class="up mt-5 text-sm text-indigo-200 flex items-center gap-2" style="--d:.35s"><i data-lucide="zap" class="w-4 h-4 text-[#FDE047]" aria-hidden="true"></i>Tanpa daftar akun. Bayar QRIS atau Virtual Account.</p>
+  </div>
+  <div class="relative lg:min-h-[34rem] lg:pt-6">
+   <svg viewBox="0 0 600 520" class="relative w-full max-w-[34rem] mx-auto block" role="img" aria-label="Aneka kemasan custom: paper bag kraft, box indigo, pouch, botol berlabel, dan hang tag">
+<defs>
+<linearGradient id="kr" x1="0" x2="1"><stop offset="0" stop-color="#DDBE90"/><stop offset="1" stop-color="#B98F5C"/></linearGradient>
+<linearGradient id="krs" x1="0" x2="1"><stop offset="0" stop-color="#A67C48"/><stop offset="1" stop-color="#8E6736"/></linearGradient>
+<linearGradient id="bx" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366F1"/><stop offset="1" stop-color="#3730A3"/></linearGradient>
+<linearGradient id="bl" x1="0" x2="1"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#E0E7FF"/><stop offset="1" stop-color="#C7D2FE"/></linearGradient>
+<linearGradient id="po" x1="0" x2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#D9DFEE"/></linearGradient>
+<filter id="sh" x="-25%" y="-20%" width="150%" height="150%"><feDropShadow dx="0" dy="14" stdDeviation="10" flood-color="#020617" flood-opacity=".45"/></filter>
+</defs>
+<g class="pk" style="--d:.1s"><g filter="url(#sh)"><path d="M312 175h104l10 165H302z" fill="url(#po)"/><rect x="312" y="175" width="104" height="14" fill="#C7D2FE"/><path d="M310 205h108" stroke="#94A3B8" stroke-dasharray="3 3"/><rect x="304" y="240" width="120" height="54" fill="#4F46E5"/><text x="364" y="273" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="700" font-size="16" fill="#fff">Nama Produk</text></g></g>
+<g class="pk" style="--d:.2s"><g filter="url(#sh)"><path d="M80 152C80 94 150 94 150 152" fill="none" stroke="#8E6736" stroke-width="6" stroke-linecap="round"/><rect x="30" y="150" width="172" height="260" rx="5" fill="url(#kr)"/><path d="M202 150l28 14v232l-28 14z" fill="url(#krs)"/><rect x="30" y="150" width="172" height="16" fill="#0F172A" opacity=".1"/><rect x="58" y="232" width="116" height="80" rx="8" fill="#fff"/><text x="116" y="268" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="21" fill="#3730A3">Brand</text><text x="116" y="294" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="21" fill="#3730A3">Kamu</text></g></g>
+<g class="pk" style="--d:.3s"><g transform="translate(226 34) rotate(-10)" filter="url(#sh)"><path d="M32 14C30 -24 -12 -26 -22 -4" fill="none" stroke="#C7D2FE" stroke-width="2"/><rect width="64" height="104" rx="8" fill="#FDE68A"/><circle cx="32" cy="14" r="5" fill="#1B1A4F"/><text x="32" y="60" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="700" font-size="14" fill="#78350F">Terima</text><text x="32" y="78" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="700" font-size="14" fill="#78350F">kasih</text></g></g>
+<g class="pk" style="--d:.4s"><g filter="url(#sh)"><path d="M215 330l32-32h210l-32 32z" fill="#818CF8"/><path d="M425 330l32-32v132l-32 32z" fill="#312E81"/><rect x="215" y="330" width="210" height="132" rx="3" fill="url(#bx)"/><path d="M215 352h210" stroke="#fff" stroke-opacity=".25"/><circle cx="320" cy="405" r="28" fill="#fff"/><text x="320" y="415" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="30" fill="#4F46E5">K</text></g></g>
+<g class="pk" style="--d:.5s"><g filter="url(#sh)"><rect x="452" y="212" width="98" height="214" rx="28" fill="url(#bl)"/><rect x="480" y="176" width="42" height="42" rx="7" fill="#1E1B4B"/><rect x="452" y="292" width="98" height="96" fill="#4F46E5"/><text x="501" y="330" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="19" fill="#fff">Glow</text><text x="501" y="354" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="19" fill="#fff">Leaf</text><rect x="464" y="226" width="9" height="62" rx="4" fill="#fff" opacity=".7"/></g></g>
+</svg>
+   <div class="wg w1" style="--d:.7s"><i data-lucide="boxes" class="w-4 h-4 text-ind" aria-hidden="true"></i>Minimal order kecil</div>
+   <div class="wg w2" style="--d:.85s"><i data-lucide="badge-check" class="w-4 h-4 text-ind" aria-hidden="true"></i>Setujui desain lewat WhatsApp</div>
+   <div class="wg w3" style="--d:1s"><i data-lucide="clock" class="w-4 h-4 text-ind" aria-hidden="true"></i><span id="wDays">Estimasi produksi tertera di tiap produk</span></div>
+   <div class="wg w4" style="--d:1.15s"><div class="text-xs font-semibold text-slate-600">Tiga produk termurah</div><ul id="wList" class="space-y-1"></ul></div>
+  </div>
+ </div>
+ <dl id="stats" class="up max-w-4xl mx-auto mt-14 sm:mt-20 grid grid-cols-3 text-center" style="--d:.5s">
+  <div class="flex flex-col-reverse px-2"><dt class="text-xs sm:text-sm font-semibold text-slate-800">Produk di katalog</dt><dd id="s1" class="font-display text-[clamp(1.7rem,5vw,3.2rem)] font-semibold text-[#0F172A] leading-tight">0</dd></div>
+  <div class="flex flex-col-reverse px-2 border-l border-slate-500/50"><dt class="text-xs sm:text-sm font-semibold text-slate-800">Harga mulai per satuan</dt><dd id="s2" class="font-display text-[clamp(1.7rem,5vw,3.2rem)] font-semibold text-[#0F172A] leading-tight">0</dd></div>
+  <div class="flex flex-col-reverse px-2 border-l border-slate-500/50"><dt class="text-xs sm:text-sm font-semibold text-slate-800">Hari produksi tercepat</dt><dd id="s3" class="font-display text-[clamp(1.7rem,5vw,3.2rem)] font-semibold text-[#0F172A] leading-tight">0</dd></div>
+ </dl>
+</section>
+
+<!-- TICKER -->
+<div class="bg-[#F8FAFC] pt-2 pb-6 overflow-hidden" aria-hidden="true">
+ <div class="tilt bg-[#FDE047] border-y-2 border-ink py-3 -mx-4" style="--r:-1.5deg">
+  <div class="mq"><div class="mq-t font-display font-bold text-lg sm:text-xl text-ink whitespace-nowrap" id="ticker"></div></div>
+ </div>
+</div>
+
+<!-- KATALOG -->
+<section id="katalog" class="bg-[#F8FAFC] pt-8 pb-14 sm:pb-24 px-5">
+ <div class="max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-end justify-between gap-x-10 gap-y-5">
+   <div class="rv max-w-xl"><h2 class="font-display font-extrabold text-4xl sm:text-6xl tracking-tight leading-[1]">Pilih, atur, langsung tahu harganya.</h2>
+   <p class="text-slate-600 mt-4 text-lg">Harga satuan turun otomatis kalau kamu pesan lebih banyak.</p></div>
+   <div id="catChips" class="rv flex flex-wrap gap-2" style="--d:.1s"></div>
+  </div>
+  <div id="prodGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8"></div>
+ </div>
+</section>
+
+<!-- ALUR -->
+<section id="alur" class="relative py-14 sm:py-24 px-5 text-white overflow-hidden">
+ <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1800&q=70" onerror="this.remove()" alt="" width="1800" height="1200" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
+ <div class="absolute inset-0 bg-gradient-to-br from-[#1e1b4b]/95 to-[#3730A3]/85"></div>
+ <div class="relative max-w-7xl mx-auto">
+  <div class="grid lg:grid-cols-[1fr_auto] gap-6 items-end">
+   <h2 class="rv font-display font-extrabold text-4xl sm:text-6xl tracking-tight leading-[1] max-w-3xl">Dari pesan sampai terkirim, desainnya kita bahas lewat WhatsApp.</h2>
+   <p class="rv text-indigo-100 max-w-xs" style="--d:.1s">Empat langkah. Kamu cuma perlu checkout dan balas chat.</p>
+  </div>
+  <ol class="relative grid sm:grid-cols-2 lg:grid-cols-12 gap-5 mt-12">
+   <li class="rv glass-d rounded-3xl p-7 lg:col-span-4 lg:row-span-2 flex flex-col"><span class="font-display font-extrabold text-8xl leading-none text-[#FDE047]">1</span><h3 class="font-display font-bold text-2xl mt-auto pt-10">Pilih & bayar</h3><p class="text-indigo-100 mt-2">Atur ukuran, bahan, dan jumlah di katalog. Checkout tanpa bikin akun.</p></li>
+   <li class="rv glass-d rounded-3xl p-6 lg:col-span-4" style="--d:.1s"><span class="font-display font-extrabold text-5xl leading-none text-indigo-300">2</span><h3 class="font-bold text-lg mt-4">Kirim file di WA</h3><p class="text-sm text-indigo-100 mt-1">Ceritakan brand-mu, kirim logo atau foto referensi.</p></li>
+   <li class="rv glass-d rounded-3xl p-6 lg:col-span-4" style="--d:.2s"><span class="font-display font-extrabold text-5xl leading-none text-indigo-300">3</span><h3 class="font-bold text-lg mt-4">ACC desain</h3><p class="text-sm text-indigo-100 mt-1">Revisi sampai cocok. Cetak baru jalan setelah kamu setuju.</p></li>
+   <li class="rv rounded-3xl p-6 lg:col-span-8 bg-white text-ink flex flex-col sm:flex-row sm:items-center gap-5 sm:col-span-2" style="--d:.3s"><span class="font-display font-extrabold text-5xl leading-none text-ind">4</span><div class="flex-1"><h3 class="font-bold text-lg">Cetak & kirim</h3><p class="text-sm text-slate-600 mt-1">Produksi 3 sampai 5 hari kerja, lalu dikirim ke alamatmu.</p></div><i data-lucide="truck" class="w-10 h-10 text-ind shrink-0" aria-hidden="true"></i></li>
+  </ol>
+  <div class="mt-12 grid md:grid-cols-[1fr_auto] gap-8 items-center rounded-3xl border border-white/20 p-6 sm:p-8">
+   <div><div class="font-display font-bold text-xl">Biar diskusinya cepat, siapin ini dulu:</div>
+   <ul class="mt-4 grid sm:grid-cols-3 gap-3 text-indigo-50 text-sm">
+    <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-300 shrink-0 mt-0.5" aria-hidden="true"></i>Nama brand dan tagline (kalau ada)</li>
+    <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-300 shrink-0 mt-0.5" aria-hidden="true"></i>Logo PNG/PDF/AI, atau foto referensi gaya</li>
+    <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-300 shrink-0 mt-0.5" aria-hidden="true"></i>Teks yang mau dicetak: IG, nomor WA, komposisi</li>
+   </ul></div>
+   <a href="https://wa.me/6281617917965?text=Halo%20Kemas.in%2C%20saya%20sudah%20siap%20kirim%20file%20desain%20dan%20mau%20diskusi%20pesanan." target="_blank" rel="noopener" class="pop pop-y dk whitespace-nowrap"><i data-lucide="send" class="w-4 h-4" aria-hidden="true"></i>Udah siap, kirim file</a>
+  </div>
+ </div>
+</section>
+
+<!-- PORTOFOLIO -->
+<section id="portofolio" class="bg-[#F1F5F9] py-12 sm:py-20 px-5">
+ <div class="max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-end justify-between gap-x-10 gap-y-5">
+   <h2 class="rv font-display font-extrabold text-4xl sm:text-6xl tracking-tight leading-[1] max-w-xl">Hasil cetak yang sudah jalan.</h2>
+   <div id="indChips" class="rv flex flex-wrap gap-2" style="--d:.1s"></div>
+  </div>
+  <div id="porGrid" class="grid grid-flow-row-dense grid-cols-2 lg:grid-cols-4 auto-rows-[11rem] sm:auto-rows-[14rem] gap-4 mt-10"></div>
+ </div>
+</section>
+
+<!-- ULASAN -->
+<section id="ulasan" class="relative py-12 sm:py-20 px-5 overflow-hidden" style="background:linear-gradient(135deg,#eef2ff,#e0f2fe)">
+ <div class="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-indigo-400/30 blur-3xl"></div><div class="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-sky-400/30 blur-3xl"></div>
+ <div class="relative max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-end justify-between gap-4"><h2 class="rv font-display font-extrabold text-4xl sm:text-6xl tracking-tight leading-[1] max-w-xl">Kata mereka yang sudah pesan.</h2><div id="ratingSum" class="rv glass rounded-2xl px-5 py-3 flex items-center gap-3" style="--d:.1s"></div></div>
+  <div id="revGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8"></div>
+ </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="bg-white py-12 sm:py-20 px-5">
+ <div class="max-w-3xl mx-auto">
+  <h2 class="rv font-display font-extrabold text-4xl sm:text-5xl tracking-tight leading-[1.05]">Pertanyaan yang sering muncul</h2>
+  <div id="faqList" class="mt-8 divide-y divide-slate-200 border-y border-slate-200"></div>
+ </div>
+</section>
+
+<!-- CTA PENUTUP -->
+<section class="px-5 pb-16 sm:pb-24 bg-white">
+ <div class="rv relative max-w-6xl mx-auto overflow-hidden rounded-[2.5rem] bg-ind text-white px-6 py-14 sm:px-14 sm:py-20 border-2 border-ink" style="box-shadow:8px 8px 0 #0F172A">
+  <div class="absolute inset-0 opacity-20" style="background-image:radial-gradient(#fff 1.2px,transparent 1.2px);background-size:22px 22px" aria-hidden="true"></div>
+  <span class="tilt hidden md:inline-flex absolute top-8 right-10 bg-[#FDE047] text-ink font-display font-bold px-4 py-2 rounded-full border-2 border-ink" style="--r:8deg" aria-hidden="true">Min. order kecil</span>
+  <span class="tilt hidden md:inline-flex absolute bottom-10 right-24 bg-white text-ink font-display font-bold px-4 py-2 rounded-full border-2 border-ink" style="--r:-6deg" aria-hidden="true">Revisi sampai cocok</span>
+  <div class="relative max-w-2xl">
+   <h2 class="font-display font-extrabold text-4xl sm:text-6xl tracking-tight leading-[1]">Brand kecil juga berhak kelihatan niat.</h2>
+   <p class="mt-5 text-lg text-indigo-100">Belum punya logo atau desain kemasan? Ngobrol dulu sama desainer kami. Gratis, tanpa harus langsung pesan.</p>
+   <div class="mt-8 flex flex-wrap gap-4">
+    <a href="#katalog" class="pop pop-y">Pesan sekarang<i data-lucide="arrow-up-right" class="w-4 h-4" aria-hidden="true"></i></a>
+    <a href="https://wa.me/6281617917965?text=Halo%20Kemas.in%2C%20saya%20belum%20punya%20logo%2Fdesain%20kemasan%2C%20mau%20tanya-tanya%20dulu." target="_blank" rel="noopener" class="pop pop-l"><i data-lucide="message-circle" class="w-4 h-4 text-[#0F7A40]" aria-hidden="true"></i>Tanya-tanya dulu di WA</a>
+   </div>
+  </div>
+ </div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="bg-[#0F172A] text-slate-300 pt-12 pb-24 px-5">
+ <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
+  <div><div class="font-display font-extrabold text-xl text-white">Kemas.in</div><p class="text-sm mt-3 max-w-xs">Jasa custom branding dan perlengkapan identitas merek untuk UMKM Indonesia.</p></div>
+  <div class="text-sm space-y-2"><div class="font-semibold text-white">Tautan cepat</div><a class="block hover:text-white" href="#katalog">Katalog</a><a class="block hover:text-white" href="#alur">Alur Desain</a><a class="block hover:text-white" href="#faq">FAQ</a><a class="block hover:text-white" href="admin.html" target="_blank">Panel Admin</a></div>
+  <div class="text-sm space-y-2"><div class="font-semibold text-white">Kontak</div><a class="flex items-center gap-2 hover:text-white" href="https://wa.me/6281617917965" target="_blank"><i data-lucide="message-circle" class="w-4 h-4"></i>0816-1791-7965</a><p>Konsultasi dan ACC desain lewat WhatsApp.</p></div>
+ </div>
+ <p class="max-w-7xl mx-auto mt-10 pt-6 border-t border-white/10 text-xs text-slate-400">© 2026 Kemas.in</p>
+</footer>
+
+<!-- FLOATING WA -->
+<div class="fixed bottom-5 right-5 z-30 flex flex-col items-end gap-3">
+ <div id="waBubble" role="status" class="relative max-w-[15rem] bg-white text-ink rounded-2xl rounded-br-md border-2 border-ink p-4 pr-10 text-sm shadow-[4px_4px_0_#0F172A]">
+  <div class="font-bold">Bingung pilih ukuran atau bahan?</div><div class="text-slate-600 mt-0.5">Tanya desainer kami lewat WhatsApp, gratis.</div>
+  <button onclick="hideWa()" aria-label="Tutup pesan" class="absolute top-1 right-1 w-9 h-9 grid place-items-center rounded-full hover:bg-slate-100"><i data-lucide="x" class="w-4 h-4"></i></button>
+ </div>
+ <a href="https://wa.me/6281617917965?text=Halo%20Kemas.in%2C%20saya%20mau%20tanya%20soal%20desain%20dan%20pesanan." target="_blank" rel="noopener" aria-label="Chat desainer lewat WhatsApp" class="relative isolate flex items-center gap-2.5 bg-[#0F7A40] hover:bg-[#0B6234] text-white rounded-full h-16 pl-4 pr-4 sm:pr-6 border-2 border-ink shadow-[4px_4px_0_#0F172A] hover:-translate-x-0.5 hover:-translate-y-0.5 transition">
+  <span class="wa-ring" aria-hidden="true"></span><span class="wa-ring r2" aria-hidden="true"></span>
+  <span class="wa-ico w-9 h-9 rounded-full bg-white/15 grid place-items-center"><i data-lucide="message-circle" class="w-6 h-6" aria-hidden="true"></i></span>
+  <span class="hidden sm:flex flex-col leading-tight"><span class="font-bold">Chat desainer</span><span class="text-xs text-emerald-100 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#FDE047]"></span>Konsultasi gratis</span></span>
+  <span class="sm:hidden absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#FDE047] border-2 border-ink" aria-hidden="true"></span>
+ </a>
+</div>
+
+<!-- CONFIG MODAL -->
+<div id="cfgModal" class="modal fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm grid place-items-center p-4" onclick="if(event.target===this)closeModal('cfgModal')">
+ <div class="box glass rounded-3xl w-full max-w-4xl max-h-[92vh] overflow-auto p-6 sm:p-8 bg-white/80" id="cfgBox" role="dialog" aria-modal="true" aria-label="Atur spesifikasi produk"></div>
+</div>
+
+<!-- CART DRAWER -->
+<div id="cartBg" class="modal fixed inset-0 z-50 bg-slate-900/30" onclick="closeCart()"></div>
+<aside id="drawer" role="dialog" aria-modal="true" aria-label="Keranjang" class="fixed top-0 right-0 bottom-0 z-50 w-full max-w-md glass bg-white/85 flex flex-col shadow-2xl">
+ <div class="p-5 flex items-center justify-between border-b border-slate-200"><h3 class="font-display font-bold text-xl">Keranjang</h3><button onclick="closeCart()" aria-label="Tutup" class="w-11 h-11 grid place-items-center"><i data-lucide="x" class="w-5 h-5"></i></button></div>
+ <div id="cartItems" class="flex-1 overflow-auto p-5 space-y-3"></div>
+ <div class="p-5 border-t border-slate-200"><div class="flex justify-between font-bold mb-3"><span>Total</span><span id="cartTotal"></span></div><button id="coBtn" onclick="openCheckout()" class="pop pop-y w-full">Lanjut checkout<i data-lucide="arrow-right" class="w-4 h-4" aria-hidden="true"></i></button></div>
+</aside>
+
+<!-- CHECKOUT MODAL -->
+<div id="coModal" class="modal fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-sm grid place-items-center p-4">
+ <div class="box bg-white rounded-[2rem] w-full max-w-4xl max-h-[92vh] overflow-auto p-6 sm:p-10 border-2 border-ink shadow-[8px_8px_0_#0F172A]" id="coBox" role="dialog" aria-modal="true" aria-label="Checkout"></div>
+</div>
+
+<div id="toast" role="status" class="fixed bottom-24 left-1/2 -translate-x-1/2 z-[70] glass bg-white/90 rounded-xl px-5 py-3 text-sm font-semibold shadow-lg flex items-center gap-2 transition-all duration-300 opacity-0 translate-y-4 pointer-events-none"></div>
+
+<script>
+const WA='6281617917965', K={p:'kemasin_products',o:'kemasin_orders',f:'kemasin_portfolio',r:'kemasin_reviews'};
+const U=(id)=>`https://images.unsplash.com/${id}?auto=format&fit=crop&w=600&q=70`;
+const SEED={
+[K.p]:[
+{id:1,name:'Paket Starter UMKM',category:'Paket Starter UMKM',basePrice:185000,moq:1,unit:'paket',productionDays:5,active:true,image:U('photo-1586075010923-2dd4570fb338'),description:'Logo sederhana, 50 stiker, 50 thank you card.'},
+{id:2,name:'Paket Hampers Lebaran',category:'Paket Starter UMKM',basePrice:320000,moq:1,unit:'paket',productionDays:7,active:true,image:U('photo-1513201099705-a9746e1e201f'),description:'Kartu ucapan, label, dan pita untuk 20 hampers.'},
+{id:3,name:'Paper Bag Kraft',category:'Kemasan & Paper Bag',basePrice:3800,moq:50,unit:'pcs',productionDays:5,active:true,image:U('photo-1597484662317-9bd7bdda2907'),description:'Paper bag kraft dengan sablon logo satu warna.'},
+{id:4,name:'Box Kemasan Custom',category:'Kemasan & Paper Bag',basePrice:7500,moq:50,unit:'pcs',productionDays:7,active:true,image:U('photo-1607344645866-009c320b63e0'),description:'Box lipat custom, cocok untuk kue, skincare, dan snack.'},
+{id:5,name:'Stiker Label Produk',category:'Stiker & Label',basePrice:1200,moq:100,unit:'pcs',productionDays:3,active:true,image:U('photo-1572375992501-4b0892d50c69'),description:'Stiker vinyl cut, tahan air, ukuran bebas.'},
+{id:6,name:'Label Botol & Toples',category:'Stiker & Label',basePrice:1800,moq:100,unit:'pcs',productionDays:4,active:true,image:U('photo-1556228720-195a672e8a03'),description:'Label melingkar untuk botol, jar, dan toples.'},
+{id:7,name:'Thank You Card',category:'Kartu & Tag',basePrice:1500,moq:100,unit:'pcs',productionDays:3,active:true,image:U('photo-1607344645866-009c320b63e0'),description:'Kartu ucapan A7 dua sisi, art carton 260gsm.'},
+{id:8,name:'Hang Tag Pakaian',category:'Kartu & Tag',basePrice:1100,moq:100,unit:'pcs',productionDays:4,active:true,image:U('photo-1558769132-cb1aea458c5e'),description:'Hang tag dengan tali, cocok untuk fesyen lokal.'}],
+[K.f]:[
+{id:1,brand:'Kopi Ibu',industry:'F&B',product:'Paper Bag Kraft',image:U('photo-1597484662317-9bd7bdda2907'),visible:true},
+{id:2,brand:'Senja Wear',industry:'Fesyen',product:'Hang Tag',image:U('photo-1558769132-cb1aea458c5e'),visible:true},
+{id:3,brand:'Glow Leaf',industry:'Skincare',product:'Label Botol',image:U('photo-1556228720-195a672e8a03'),visible:true},
+{id:4,brand:'Hampers Nusa',industry:'Hampers',product:'Box Kemasan',image:U('photo-1513201099705-a9746e1e201f'),visible:true},
+{id:5,brand:'Bakpia Mekar',industry:'F&B',product:'Stiker Label',image:U('photo-1572375992501-4b0892d50c69'),visible:true},
+{id:6,brand:'Laras Batik',industry:'Fesyen',product:'Thank You Card',image:U('photo-1607344645866-009c320b63e0'),visible:true},
+{id:7,brand:'Pure Skin',industry:'Skincare',product:'Box Kemasan',image:U('photo-1607344645866-009c320b63e0'),visible:true},
+{id:8,brand:'Bingkisan Hari',industry:'Hampers',product:'Paket Hampers',image:U('photo-1513201099705-a9746e1e201f'),visible:true}],
+[K.r]:[
+{id:1,name:'Rina Wulandari',brand:'Kopi Ibu',businessType:'Kedai kopi rumahan',product:'Paper Bag Kraft',rating:5,text:'Minimal 50 pcs, cocok buat usaha baru. Hasil cetaknya rapi dan warnanya sesuai.',visible:true},
+{id:2,name:'Dimas Prakoso',brand:'Senja Wear',businessType:'Brand fesyen',product:'Hang Tag',rating:5,text:'Diskusi desain di WA enak, revisi cepat. Barang sampai sesuai estimasi.',visible:true},
+{id:3,name:'Sari Anggraini',brand:'Glow Leaf',businessType:'Skincare lokal',product:'Label Botol',rating:4,text:'Labelnya tahan air dan potongannya presisi. Pelanggan jadi lebih percaya.',visible:true},
+{id:4,name:'Bu Wati',brand:'Bakpia Mekar',businessType:'Oleh-oleh',product:'Stiker Label',rating:5,text:'Harga masuk akal untuk modal kecil. Stikernya bikin kemasan lama terlihat baru.',visible:true}],
+[K.o]:[]};
+function seed(){Object.keys(SEED).forEach(k=>{try{if(localStorage.getItem(k)===null)localStorage.setItem(k,JSON.stringify(SEED[k]))}catch(e){}})}
+function get(k){try{const v=JSON.parse(localStorage.getItem(k));return Array.isArray(v)?v:SEED[k]}catch(e){return SEED[k]}}
+const rp=n=>'Rp'+(Math.round(Number(n)||0)).toLocaleString('id-ID');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const FB=(t)=>`this.onerror=null;this.src='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect width=%22400%22 height=%22300%22 fill=%22%23EEF2FF%22/><rect x=%22130%22 y=%2290%22 width=%22140%22 height=%22120%22 rx=%2212%22 fill=%22%234F46E5%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2216%22 fill=%22%233730A3%22>Kemas.in</text></svg>')`;
+const img=(src,cls)=>`<img src="${esc(src)}" alt="" width="600" height="400" loading="lazy" class="${cls}" onerror="${FB()}">`;
+
+/* ---------- PRODUK ---------- */
+const CATS=['Semua','Paket Starter UMKM','Kemasan & Paper Bag','Stiker & Label','Kartu & Tag'];
+let cat='Semua', ind='Semua', cart=[], cur=null, sel={};
+function chips(el,list,active,fn){document.getElementById(el).innerHTML=list.map(c=>`<button class="chip ${c===active?'on':''}" aria-pressed="${c===active}" onclick="${fn}('${c.replace(/'/g,"\\'")}')">${esc(c)}</button>`).join('')}
+function renderProducts(){
+ chips('catChips',CATS,cat,'setCat');
+ const l=get(K.p).filter(p=>p.active===true&&(cat==='Semua'||p.category===cat));
+ // bento: kartu pertama besar (2x2) kalau produk >= 5, kartu terakhir melebar supaya baris terakhir penuh
+ const big=l.length>=5, rest=(l.length+(big?3:0))%4, wide=rest?4-rest+1:1;
+ document.getElementById('prodGrid').innerHTML=l.length?l.map((p,i)=>{const B=big&&i===0, W=!B&&i===l.length-1&&wide>1;
+ return `<article style="--d:${(i%8)*.06}s" class="rv group bg-white rounded-3xl overflow-hidden border-2 border-slate-200 hover:border-ink lift flex flex-col ${B?'sm:col-span-2 lg:row-span-2':''} ${W?`lg:col-span-${wide} lg:flex-row`:''}">
+  <div class="relative overflow-hidden bg-slate-100 ${B?'h-60 lg:h-auto lg:flex-1 lg:min-h-[16rem]':W?'h-44 lg:h-auto lg:w-1/2':'h-44'}">${img(p.image,'absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500')}
+  ${B?'<span class="tilt absolute top-4 left-4 bg-[#FDE047] text-ink text-sm font-bold px-3 py-1.5 rounded-full border-2 border-ink" style="--r:-4deg">Paling sering dipesan</span>':''}</div>
+  <div class="${B?'p-6':'p-4 flex-1'} flex flex-col"><span class="text-xs font-semibold text-ind">${esc(p.category)}</span><h3 class="font-display font-bold ${B?'text-3xl':'text-lg'} mt-1 leading-tight">${esc(p.name)}</h3><p class="text-sm text-slate-500 mt-1 flex-1">${esc(p.description)}</p>
+  <div class="mt-3 flex items-end justify-between gap-3"><div><span class="font-display font-bold ${B?'text-3xl':'text-xl'}">${rp(p.basePrice)}</span><span class="text-sm text-slate-500"> /${esc(p.unit)}</span><div class="text-xs text-slate-500 mt-0.5">Min. ${p.moq} ${esc(p.unit)}, produksi ${p.productionDays} hari</div></div></div>
+  <button onclick="openCfg(${p.id})" class="pop pop-i mt-4 w-full text-sm">Pesan Sekarang<i data-lucide="arrow-up-right" class="w-4 h-4" aria-hidden="true"></i></button></div></article>`}).join(''):'<p class="col-span-full text-slate-500">Belum ada produk di kategori ini.</p>';
+ lucide.createIcons();
+}
+function setCat(c){cat=c;renderProducts()}
+
+/* ---------- KONFIGURATOR ---------- */
+const SIZES=[['Kecil',1],['Sedang',1.15],['Besar',1.35]], MATS=[['Standar',1],['Premium',1.2],['Eco Kraft',1.1]], FINS=[['Doff',1],['Glossy',1.05]], DES=[['Sudah punya file',0],['Tambah jasa desain',150000]];
+function tier(q,moq){const r=q/Math.max(moq,1);return r>=10?.82:r>=5?.9:1}
+function calc(){
+ const p=cur,s=sel,m=SIZES[s.s][1]*MATS[s.m][1]*FINS[s.f][1],t=tier(s.q,p.moq);
+ const unit=Math.round((Number(p.basePrice)||0)*m*t), fee=DES[s.d][1], sub=unit*s.q+fee;
+ return{unit,fee,sub,disc:Math.round((1-t)*100)};
+}
+function openCfg(id){
+ cur=get(K.p).find(p=>p.id===id); if(!cur)return;
+ sel={s:0,m:0,f:0,d:0,q:Number(cur.moq)||1};
+ drawCfg(); openModal('cfgModal');
+}
+function optRow(label,list,key,icon){return `<div class="mt-4"><div class="text-sm font-semibold mb-2">${label}</div><div class="grid grid-cols-${list.length===2?2:3} gap-2">${list.map((o,i)=>`<button class="opt ${sel[key]===i?'on':''}" aria-pressed="${sel[key]===i}" onclick="pick('${key}',${i})">${o[0]}${o[1]>0&&key==='d'?`<div class="text-xs font-normal">+${rp(o[1])}</div>`:''}</button>`).join('')}</div></div>`}
+function drawCfg(){
+ const p=cur,c=calc();
+ document.getElementById('cfgBox').innerHTML=`<div class="flex justify-between items-start"><div><h3 class="font-display font-bold text-2xl">${esc(p.name)}</h3><p class="text-sm text-slate-500">${esc(p.description)}</p></div><button onclick="closeModal('cfgModal')" aria-label="Tutup" class="w-11 h-11 grid place-items-center shrink-0"><i data-lucide="x" class="w-5 h-5"></i></button></div>
+ <div class="grid md:grid-cols-2 gap-8 mt-4"><div>
+  ${optRow('Ukuran',SIZES,'s')}${optRow('Jenis bahan',MATS,'m')}${optRow('Finishing',FINS,'f')}${optRow('Status desain',DES,'d')}
+  <div class="mt-4"><div class="text-sm font-semibold mb-2">Jumlah (min. ${p.moq} ${esc(p.unit)})</div><div class="flex items-center gap-2"><button class="opt w-12 h-12 px-0 text-center text-lg" aria-label="Kurangi jumlah" onclick="qty(-1)">−</button><input id="qIn" aria-label="Jumlah pesanan" type="number" min="${p.moq}" value="${sel.q}" class="fld text-center font-bold" style="max-width:110px" onchange="qtySet(this.value)"><button class="opt w-12 h-12 px-0 text-center text-lg" aria-label="Tambah jumlah" onclick="qty(1)">+</button><span class="text-sm text-slate-500">${esc(p.unit)}</span></div></div>
+ </div>
+ <div class="bg-ind-tint rounded-3xl p-6 flex flex-col gap-0"><div class="text-sm text-slate-600">Harga satuan</div><div class="font-display font-bold text-3xl text-ind-dark">${rp(c.unit)}</div>
+  ${c.disc?`<div class="text-xs font-semibold text-emerald-700 mt-1">Diskon jumlah ${c.disc}% sudah masuk</div>`:`<div class="text-xs text-slate-500 mt-1">Pesan ${p.moq*5}+ ${esc(p.unit)} untuk diskon 10%, ${p.moq*10}+ untuk 18%</div>`}
+  <div class="mt-4 text-sm space-y-1"><div class="flex justify-between"><span>${sel.q} × ${rp(c.unit)}</span><span>${rp(c.unit*sel.q)}</span></div>${c.fee?`<div class="flex justify-between"><span>Jasa desain</span><span>${rp(c.fee)}</span></div>`:''}</div>
+  <div class="flex justify-between font-bold text-lg mt-3 pt-3 border-t border-indigo-200"><span>Total</span><span>${rp(c.sub)}</span></div>
+  <div class="flex items-center gap-2 text-sm mt-4"><i data-lucide="clock" class="w-4 h-4 text-ind"></i>Estimasi produksi ${Number(p.productionDays)||5} hari kerja</div><div class="h-6 shrink-0"></div>
+  <button onclick="addCart()" class="pop pop-y w-full mt-auto">Tambah ke keranjang<i data-lucide="shopping-bag" class="w-4 h-4" aria-hidden="true"></i></button></div></div>`;
+ lucide.createIcons();
+}
+function pick(k,i){sel[k]=i;drawCfg()}
+function qtySet(v){const n=parseInt(v);sel.q=Math.max(Number(cur.moq)||1,isNaN(n)?cur.moq:n);drawCfg()}
+function qty(d){qtySet(sel.q+d*Math.max(1,Math.round((cur.moq||1)/ (cur.moq>=50?1:1))))}
+function addCart(){
+ const c=calc();
+ cart.push({pid:cur.id,productName:cur.name,moq:cur.moq,size:SIZES[sel.s][0],material:MATS[sel.m][0],finishing:FINS[sel.f][0],designOption:DES[sel.d][0],qty:sel.q,unitPrice:c.unit,subtotal:c.sub});
+ closeModal('cfgModal'); renderCart(); toast('<i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>'+esc(cur.name)+' masuk keranjang');
+}
+
+/* ---------- KERANJANG ---------- */
+const total=()=>cart.reduce((a,i)=>a+i.subtotal,0);
+function renderCart(){
+ document.getElementById('badge').textContent=cart.length;
+ document.getElementById('cartTotal').textContent=rp(total());
+ document.getElementById('coBtn').disabled=!cart.length; document.getElementById('coBtn').classList.toggle('opacity-50',!cart.length);
+ document.getElementById('cartItems').innerHTML=cart.length?cart.map((i,x)=>`<div class="bg-white rounded-2xl p-4 border border-slate-200"><div class="flex justify-between gap-2"><div><div class="font-bold">${esc(i.productName)}</div><div class="text-xs text-slate-500">${esc(i.size)} · ${esc(i.material)} · ${esc(i.finishing)} · ${esc(i.designOption)}</div></div><button onclick="rm(${x})" aria-label="Hapus" class="w-11 h-11 grid place-items-center shrink-0"><i data-lucide="trash-2" class="w-4 h-4 text-slate-400 hover:text-red-500"></i></button></div>
+ <div class="flex justify-between items-center mt-3"><div class="flex items-center gap-1"><button class="opt min-w-[44px] text-center" aria-label="Kurangi jumlah" onclick="cq(${x},-1)">−</button><span class="w-14 text-center font-semibold">${i.qty}</span><button class="opt min-w-[44px] text-center" aria-label="Tambah jumlah" onclick="cq(${x},1)">+</button></div><div class="font-bold">${rp(i.subtotal)}</div></div></div>`).join(''):'<p class="text-slate-500 text-sm text-center mt-10">Keranjang masih kosong. Pilih produk di katalog untuk mulai.</p>';
+ lucide.createIcons();
+}
+function cq(x,d){const i=cart[x],step=Math.max(1,Math.round(i.moq/ (i.moq>=50?2:1)));const q=Math.max(i.moq,i.qty+d*step);const fee=i.designOption!=='Sudah punya file'?150000:0;
+ const base=(get(K.p).find(p=>p.id===i.pid)||{}).basePrice||i.unitPrice;const m=(SIZES.find(s=>s[0]===i.size)||[0,1])[1]*(MATS.find(s=>s[0]===i.material)||[0,1])[1]*(FINS.find(s=>s[0]===i.finishing)||[0,1])[1];
+ i.qty=q;i.unitPrice=Math.round(base*m*tier(q,i.moq));i.subtotal=i.unitPrice*q+fee;renderCart()}
+function rm(x){cart.splice(x,1);renderCart()}
+function openCart(){renderCart();document.getElementById('cartBg').classList.add('open');document.getElementById('drawer').classList.add('open')}
+function closeCart(){document.getElementById('cartBg').classList.remove('open');document.getElementById('drawer').classList.remove('open')}
+let lastFocus=null;
+function openModal(id){lastFocus=document.activeElement;const m=document.getElementById(id);m.classList.add('open');setTimeout(()=>{const f=m.querySelector('button,input,select');if(f)f.focus()},60)}
+function closeModal(id){document.getElementById(id).classList.remove('open');if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+function toggleMenu(f){const m=document.getElementById('mnav'),b=document.getElementById('menuBtn'),o=typeof f==='boolean'?f:m.classList.contains('hidden');m.classList.toggle('hidden',!o);m.classList.toggle('flex',o);b.setAttribute('aria-expanded',o)}
+document.getElementById('mnav').addEventListener('click',e=>{if(e.target.closest('a'))toggleMenu(false)});
+function toast(h){const t=document.getElementById('toast');t.innerHTML=h;lucide.createIcons();t.classList.remove('opacity-0','translate-y-4');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.add('opacity-0','translate-y-4'),2400)}
+
+/* ---------- CHECKOUT ---------- */
+let pay='QRIS', bank='BCA';
+function openCheckout(){if(!cart.length)return;closeCart();pay='QRIS';drawCheckout();openModal('coModal')}
+function qrSvg(){let s='';for(let y=0;y<21;y++)for(let x=0;x<21;x++){const f=(x<7&&y<7)||(x>13&&y<7)||(x<7&&y>13);const on=f?(x%6===0||y%6===0||x===14||x===20||y===14||y===20||(x%6>1&&x%6<5&&y%6>1&&y%6<5)):((x*7+y*13+x*y)%3===0);if(on)s+=`<rect x="${x}" y="${y}" width="1" height="1"/>`}return `<svg viewBox="0 0 21 21" class="w-40 h-40 bg-white p-2 rounded-xl border" fill="#0F172A">${s}</svg>`}
+function drawCheckout(){
+ const f=(window._f||{});
+ const fld=(id,lb,attr,val,ta)=>`<div><label class="lb" for="${id}">${lb}</label>${ta?`<textarea id="${id}" class="fld" rows="3" ${attr}>${esc(val)}</textarea>`:`<input id="${id}" class="fld" ${attr} value="${esc(val)}">`}</div>`;
+ document.getElementById('coBox').innerHTML=`<div class="flex items-start justify-between gap-4"><div><h3 class="font-display font-extrabold text-3xl sm:text-4xl tracking-tight">Checkout</h3><p class="text-slate-600 mt-1">Isi data pengiriman, pilih cara bayar, beres.</p></div><button onclick="closeModal('coModal')" aria-label="Tutup" class="w-11 h-11 grid place-items-center shrink-0 rounded-full hover:bg-slate-100"><i data-lucide="x" class="w-5 h-5"></i></button></div>
+ <div class="mt-8 grid md:grid-cols-2 gap-8 md:gap-10">
+  <section aria-labelledby="coH1"><h4 id="coH1" class="flex items-center gap-2.5 font-display font-bold text-lg"><span class="w-7 h-7 rounded-full bg-ink text-white text-sm grid place-items-center">1</span>Data pengiriman</h4>
+   <div class="mt-5 grid gap-5">${fld('fN','Nama penerima','autocomplete="name" placeholder="Contoh: Rina Wulandari"',f.n)}${fld('fB','Nama brand','placeholder="Contoh: Kopi Ibu"',f.b)}${fld('fP','No. HP / WhatsApp','type="tel" inputmode="tel" autocomplete="tel" placeholder="081234567890"',f.p)}${fld('fA','Alamat lengkap pengiriman','autocomplete="street-address" placeholder="Jalan, nomor rumah, kecamatan, kota, kode pos"',f.a,1)}</div>
+  </section>
+  <section aria-labelledby="coH2" class="flex flex-col"><h4 id="coH2" class="flex items-center gap-2.5 font-display font-bold text-lg"><span class="w-7 h-7 rounded-full bg-ink text-white text-sm grid place-items-center">2</span>Pembayaran</h4>
+   <div class="grid grid-cols-2 gap-3 mt-5"><button class="opt ${pay==='QRIS'?'on':''}" aria-pressed="${pay==='QRIS'}" onclick="setPay('QRIS')"><span class="flex items-center gap-2"><i data-lucide="qr-code" class="w-4 h-4" aria-hidden="true"></i>QRIS</span></button><button class="opt ${pay==='VA'?'on':''}" aria-pressed="${pay==='VA'}" onclick="setPay('VA')"><span class="flex items-center gap-2"><i data-lucide="landmark" class="w-4 h-4" aria-hidden="true"></i>Virtual Account</span></button></div>
+   <div class="mt-4 bg-ind-tint rounded-2xl p-5 flex flex-col items-center text-sm">${pay==='QRIS'?`${qrSvg()}<p class="mt-3 text-slate-600 text-center">Scan dengan aplikasi bank atau e-wallet (simulasi)</p>`:`<div class="flex flex-wrap justify-center gap-2 mb-4">${['BCA','BRI','Mandiri'].map(b=>`<button class="chip ${bank===b?'on':''}" aria-pressed="${bank===b}" onclick="keep();bank='${b}';drawCheckout()">${b}</button>`).join('')}</div><div class="text-slate-600">Nomor Virtual Account ${bank}</div><div class="font-display font-bold text-2xl tracking-wider mt-1">${{BCA:'39201',BRI:'88810',Mandiri:'88908'}[bank]} 0816 1791</div>`}</div>
+   <div class="mt-5 rounded-2xl border border-slate-200 p-5 text-sm space-y-2">${cart.map(i=>`<div class="flex justify-between gap-3"><span class="text-slate-600">${esc(i.productName)} <span class="text-slate-400">x${i.qty}</span></span><span class="font-semibold whitespace-nowrap">${rp(i.subtotal)}</span></div>`).join('')}
+    <div class="flex justify-between items-baseline font-bold pt-3 mt-1 border-t border-slate-200"><span>Total bayar</span><span class="font-display text-2xl">${rp(total())}</span></div></div>
+   <p id="coErr" role="alert" class="text-red-700 text-sm font-semibold mt-4 hidden"></p>
+   <button onclick="confirmPay()" class="pop pop-i w-full mt-5">Konfirmasi pembayaran<i data-lucide="check" class="w-4 h-4" aria-hidden="true"></i></button>
+  </section>
+ </div>`;
+ lucide.createIcons();
+}
+function keep(){window._f={n:v('fN'),b:v('fB'),p:v('fP'),a:v('fA')}}
+function v(id){const e=document.getElementById(id);return e?e.value.trim():''}
+function setPay(p){keep();pay=p;drawCheckout()}
+function confirmPay(){
+ keep();const f=window._f,err=document.getElementById('coErr');
+ if(!f.n||!f.b||!f.p||!f.a){err.textContent='Lengkapi nama, brand, nomor HP, dan alamat dulu.';err.classList.remove('hidden');return}
+ if(!/^[0-9+\-\s]{8,16}$/.test(f.p)){err.textContent='Nomor HP belum valid. Contoh: 081234567890';err.classList.remove('hidden');return}
+ const orders=get(K.o);const mx=orders.reduce((m,o)=>Math.max(m,parseInt(String(o.id).replace(/\D/g,''))||0),108);
+ const order={id:'#KMS-'+(mx+1),createdAt:new Date().toISOString(),customerName:f.n,brandName:f.b,phone:f.p,address:f.a,
+  items:cart.map(i=>({productName:i.productName,size:i.size,material:i.material,finishing:i.finishing,designOption:i.designOption,qty:i.qty,unitPrice:i.unitPrice,subtotal:i.subtotal})),
+  total:total(),paymentMethod:pay==='QRIS'?'QRIS':'VA '+bank,status:'Baru Bayar'};
+ orders.push(order);try{localStorage.setItem(K.o,JSON.stringify(orders))}catch(e){}
+ const lines=order.items.map((i,n)=>`${n+1}. ${i.productName} (${i.size}, ${i.material}, ${i.finishing}, ${i.designOption}) x${i.qty} = ${rp(i.subtotal)}`).join('\n');
+ const msg=`Halo Kemas.in, saya sudah bayar pesanan ${order.id}.\nNama: ${order.customerName}\nBrand: ${order.brandName}\nHP: ${order.phone}\nAlamat: ${order.address}\n\nPesanan:\n${lines}\n\nTotal: ${rp(order.total)} (${order.paymentMethod})\n\nSaya mau lanjut diskusi desain dan kirim file.`;
+ cart=[];window._f={};renderCart();
+ document.getElementById('coBox').innerHTML=`<div class="text-center py-4 max-w-md mx-auto"><div class="mx-auto w-16 h-16 rounded-full bg-emerald-100 grid place-items-center"><i data-lucide="check" class="w-8 h-8 text-emerald-600"></i></div>
+ <h3 class="font-display font-bold text-2xl mt-4">Pembayaran diterima</h3><p class="text-slate-600 mt-1">Nomor order kamu</p><div class="font-display font-extrabold text-3xl text-ind my-2">${esc(order.id)}</div>
+ <p class="text-sm text-slate-600 max-w-sm mx-auto">Langkah berikutnya: kirim logo atau referensi desain lewat WhatsApp supaya produksi bisa dimulai.</p>
+ <a href="https://wa.me/${WA}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener" class="pop pop-w w-full mt-6"><i data-lucide="message-circle" class="w-4 h-4"></i>Lanjut Diskusi / Kirim File di WhatsApp</a>
+ <a href="admin.html" target="_blank" class="mt-3 block border border-slate-300 hover:border-ind rounded-xl py-3 font-semibold text-sm">Cek Pesanan di Panel Admin</a>
+ <button onclick="closeModal('coModal')" class="mt-3 min-h-[44px] px-4 text-sm text-slate-600 underline">Tutup</button></div>`;
+ lucide.createIcons();
+}
+
+/* ---------- PORTOFOLIO, ULASAN, FAQ ---------- */
+const INDS=['Semua','F&B','Fesyen','Skincare','Hampers'];
+function setInd(c){ind=c;renderPortfolio()}
+function renderPortfolio(){
+ chips('indChips',INDS,ind,'setInd');
+ const l=get(K.f).filter(p=>p.visible===true&&(ind==='Semua'||p.industry===ind));
+ document.getElementById('porGrid').innerHTML=l.length?l.map((p,i)=>`<figure style="--d:${(i%8)*.06}s" class="rv relative rounded-3xl overflow-hidden group bg-slate-200 ${l.length>=6?({0:'col-span-2 row-span-2',6:'col-span-2'})[i%8]||'':''}">${img(p.image,'w-full h-full object-cover group-hover:scale-110 transition duration-500')}
+ <figcaption class="absolute inset-0 bg-gradient-to-t from-[#1e1b4b]/90 via-transparent md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100 transition flex flex-col justify-end p-4 text-white"><div class="font-bold">${esc(p.brand)}</div><div class="text-xs text-indigo-200">${esc(p.industry)} · ${esc(p.product)}</div></figcaption></figure>`).join(''):'<p class="col-span-full text-slate-500">Belum ada portofolio di kategori ini.</p>';
+}
+function renderReviews(){
+ const l=get(K.r).filter(r=>r.visible===true);
+ const avg=l.length?l.reduce((a,r)=>a+(Number(r.rating)||0),0)/l.length:0;
+ const star=n=>Array.from({length:5},(_,i)=>`<i data-lucide="star" class="w-4 h-4 ${i<Math.round(n)?'fill-amber-400 text-amber-400':'text-slate-300'}"></i>`).join('');
+ document.getElementById('ratingSum').innerHTML=l.length?`<span class="font-display font-bold text-3xl">${avg.toFixed(1)}</span><div><div class="flex">${star(avg)}</div><div class="text-xs text-slate-600">dari ${l.length} ulasan</div></div>`:'<span class="text-sm text-slate-600">Belum ada ulasan</span>';
+ const big=l.length>=3,rem=(l.length+(big?1:0))%3,lastSpan=rem?1+3-rem:1;
+ document.getElementById('revGrid').innerHTML=l.map((r,i)=>{const B=big&&i===0,W=!B&&i===l.length-1&&lastSpan>1;
+  return B?`<article style="--d:0s" class="rv lg:col-span-2 md:col-span-2 rounded-3xl p-8 sm:p-10 bg-ink text-white flex flex-col"><div class="flex">${star(r.rating)}</div><p class="mt-5 font-display font-semibold text-2xl sm:text-3xl leading-snug">“${esc(r.text)}”</p><div class="mt-auto pt-8 flex items-center gap-3"><span class="w-11 h-11 rounded-full bg-[#FDE047] text-ink font-display font-bold grid place-items-center">${esc(String(r.name||'?').charAt(0))}</span><div class="text-sm"><div class="font-bold">${esc(r.name)}, ${esc(r.brand)}</div><div class="text-indigo-200">${esc(r.businessType)}, pesan ${esc(r.product)}</div></div></div></article>`
+  :`<article style="--d:${(i%6)*.08}s" class="rv glass rounded-3xl p-6 lift flex flex-col ${W?`lg:col-span-${lastSpan}`:''}"><div class="flex">${star(r.rating)}</div><p class="mt-3 text-slate-700">${esc(r.text)}</p><div class="mt-auto pt-4 text-sm"><div class="font-bold">${esc(r.name)}, ${esc(r.brand)}</div><div class="text-slate-500">${esc(r.businessType)}, pesan ${esc(r.product)}</div></div></article>`}).join('');
+ lucide.createIcons();
+}
+const FAQ=[['Berapa minimal order?','Tiap produk punya minimal sendiri, misalnya stiker mulai 100 pcs dan paper bag mulai 50 pcs. Angkanya tertera di kartu produk.'],
+['Bagaimana kalau belum punya logo?','Pilih "Tambah jasa desain" di konfigurator. Setelah bayar, desainer kita diskusi denganmu lewat WhatsApp.'],
+['Revisi desain dilakukan di mana?','Semua revisi dan ACC desain lewat WhatsApp 0816-1791-7965. Cetak baru jalan setelah kamu setuju.'],
+['Berapa lama pengerjaannya?','Biasanya 3 sampai 5 hari kerja setelah desain di-ACC. Estimasi tiap produk ada di konfigurator.'],
+['Perlu daftar akun untuk memesan?','Tidak perlu. Langsung isi data penerima saat checkout, nomor order muncul setelah pembayaran.']];
+function renderFaq(){document.getElementById('faqList').innerHTML=FAQ.map(f=>`<div class="faq"><button class="w-full flex justify-between items-center gap-4 px-1 py-5 text-left font-semibold" aria-expanded="false" onclick="const p=this.parentNode;p.classList.toggle('open');this.setAttribute('aria-expanded',p.classList.contains('open'))">${f[0]}<i data-lucide="chevron-down" class="ch w-5 h-5 transition"></i></button><div class="faq-a"><div><p class="pb-5 text-slate-600">${f[1]}</p></div></div></div>`).join('')}
+
+/* ---------- INIT ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function reveal(){document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el))}
+const fmtS=(i,v)=>i===1?rp(v):String(v);
+let counted=false;
+function renderHero(){
+ const a=get(K.p).filter(p=>p.active===true),pr=a.map(p=>Number(p.basePrice)||0).filter(n=>n>0),dy=a.map(p=>Number(p.productionDays)||0).filter(n=>n>0);
+ const v=[a.length,pr.length?Math.min(...pr):0,dy.length?Math.min(...dy):0];
+ v.forEach((n,i)=>{const e=document.getElementById('s'+(i+1));e.dataset.to=n;if(counted||RM)e.textContent=fmtS(i,n)});
+ const wd=document.getElementById('wDays');if(dy.length)wd.textContent=Math.min(...dy)===Math.max(...dy)?`Produksi ${dy[0]} hari kerja`:`Produksi ${Math.min(...dy)} sampai ${Math.max(...dy)} hari kerja`;
+ document.getElementById('wList').innerHTML=a.slice().sort((x,y)=>x.basePrice-y.basePrice).slice(0,3).map(p=>`<li class="flex justify-between gap-4 text-sm"><span class="truncate">${esc(p.name)}</span><b class="whitespace-nowrap">${rp(p.basePrice)}</b></li>`).join('')||'<li class="text-sm text-slate-600">Katalog sedang diperbarui</li>';
+}
+function countUp(){
+ if(counted)return;counted=true;
+ [1,2,3].forEach(i=>{const e=document.getElementById('s'+i),to=Number(e.dataset.to)||0,t0=performance.now();
+  (function f(t){const k=Math.min((t-t0)/1100,1),n=Math.round(to*(1-Math.pow(1-k,3)));e.textContent=fmtS(i-1,n);if(k<1)requestAnimationFrame(f)})(t0)});
+}
+function renderAll(){renderHero();renderProducts();renderPortfolio();renderReviews();lucide.createIcons();reveal()}
+function renderTicker(){
+ const words=[...get(K.p).filter(p=>p.active===true).map(p=>p.name),'Tanpa daftar akun','ACC desain lewat WA','Bayar pakai QRIS'];
+ const row=words.map(w=>`<span class="flex items-center gap-10">${esc(w)}<i data-lucide="sparkle" class="w-5 h-5 fill-current"></i></span>`).join('');
+ document.getElementById('ticker').innerHTML=row+row; lucide.createIcons();
+}
+/* navbar aktif sesuai section */
+const nls=[...document.querySelectorAll('.nl')];
+const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)nls.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('act',on);on?a.setAttribute('aria-current','true'):a.removeAttribute('aria-current')})}),{rootMargin:'-45% 0px -50% 0px'});
+['top','katalog','alur','portofolio','ulasan','faq'].forEach(id=>spy.observe(document.getElementById(id)));
+/* gelembung WA muncul setelah 5 detik, sekali per sesi */
+function hideWa(){document.getElementById('waBubble').classList.remove('show');try{sessionStorage.setItem('kemasin_wa','1')}catch(e){}}
+setTimeout(()=>{let seen=null;try{seen=sessionStorage.getItem('kemasin_wa')}catch(e){}if(!seen)document.getElementById('waBubble').classList.add('show')},5000);
+seed();renderAll();renderTicker();renderFaq();renderCart();lucide.createIcons();
+const sio=new IntersectionObserver(es=>{if(es[0].isIntersecting){countUp();sio.disconnect()}},{threshold:.4});sio.observe(document.getElementById('stats'));
+window.addEventListener('storage',e=>{if(!e.key||Object.values(K).includes(e.key)){renderAll();renderTicker();if(document.getElementById('cfgModal').classList.contains('open')&&cur){const n=get(K.p).find(p=>p.id===cur.id&&p.active===true);if(n){cur=n;drawCfg()}else closeModal('cfgModal')}}});
+window.addEventListener('scroll',()=>document.querySelector('#nav nav').classList.toggle('shadow-xl',scrollY>10));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('cfgModal');closeModal('coModal');closeCart();toggleMenu(false)}});
+</script>
+</body>
+</html>
