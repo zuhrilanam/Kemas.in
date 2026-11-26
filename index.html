@@ -319,7 +319,7 @@ function renderProducts(){
   <button onclick="openCfg(${p.id})" class="pop pop-i mt-4 w-full text-sm">Pesan Sekarang<i data-lucide="arrow-up-right" class="w-4 h-4" aria-hidden="true"></i></button></div></article>`}).join(''):'<p class="col-span-full text-slate-500">Belum ada produk di kategori ini.</p>';
  lucide.createIcons();
 }
-function setCat(c){cat=c;renderProducts()}
+function setCat(c){cat=c;renderProducts();reveal()}
 
 /* ---------- KONFIGURATOR ---------- */
 const SIZES=[['Kecil',1],['Sedang',1.15],['Besar',1.35]], MATS=[['Standar',1],['Premium',1.2],['Eco Kraft',1.1]], FINS=[['Doff',1],['Glossy',1.05]], DES=[['Sudah punya file',0],['Tambah jasa desain',150000]];
@@ -441,7 +441,7 @@ async function confirmPay(){
 
 /* ---------- PORTOFOLIO, ULASAN, FAQ ---------- */
 const INDS=['Semua','F&B','Fesyen','Skincare','Hampers'];
-function setInd(c){ind=c;renderPortfolio()}
+function setInd(c){ind=c;renderPortfolio();reveal()}
 function renderPortfolio(){
  chips('indChips',INDS,ind,'setInd');
  const l=get(K.f).filter(p=>p.visible===true&&(ind==='Semua'||p.industry===ind));
@@ -498,6 +498,12 @@ const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)nls.fo
 function hideWa(){document.getElementById('waBubble').classList.remove('show');try{sessionStorage.setItem('kemasin_wa','1')}catch(e){}}
 setTimeout(()=>{let seen=null;try{seen=sessionStorage.getItem('kemasin_wa')}catch(e){}if(!seen)document.getElementById('waBubble').classList.add('show')},5000);
 seed();renderAll();renderTicker();renderFaq();renderCart();lucide.createIcons();
+/* katalog, portofolio, ulasan diambil dari server supaya sama di semua perangkat */
+async function pullContent(){try{const k='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF0aXdnd295dnBhb3RqeXNmZGdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU2NTMyOTMsImV4cCI6MjExMTIyOTI5M30.hqZh_c0bWcNyo2e4pGF-S39GAZ_LM7xQrTCrIjjUrIw';
+ const r=await fetch('https://qtiwgwoyvpaotjysfdgq.supabase.co/rest/v1/content?select=key,data',{headers:{apikey:k,Authorization:'Bearer '+k}});if(!r.ok)return;let ch=false;
+ (await r.json()).forEach(row=>{if(![K.p,K.f,K.r].includes(row.key)||!Array.isArray(row.data))return;const s=JSON.stringify(row.data);if(s!==localStorage.getItem(row.key)){localStorage.setItem(row.key,s);ch=true}});
+ if(ch){renderAll();renderTicker()}}catch(e){}}
+pullContent();setInterval(()=>{if(!document.hidden)pullContent()},10000);
 const sio=new IntersectionObserver(es=>{if(es[0].isIntersecting){countUp();sio.disconnect()}},{threshold:.4});sio.observe(document.getElementById('stats'));
 window.addEventListener('storage',e=>{if(!e.key||Object.values(K).includes(e.key)){renderAll();renderTicker();if(document.getElementById('cfgModal').classList.contains('open')&&cur){const n=get(K.p).find(p=>p.id===cur.id&&p.active===true);if(n){cur=n;drawCfg()}else closeModal('cfgModal')}}});
 window.addEventListener('scroll',()=>document.querySelector('#nav nav').classList.toggle('shadow-xl',scrollY>10));

@@ -175,11 +175,16 @@ function mkOrders(){
 const seeds=()=>({[K.p]:SP,[K.o]:mkOrders(),[K.f]:SF,[K.r]:SR});
 function seed(force){const s=seeds();Object.keys(s).forEach(k=>{try{if(force||localStorage.getItem(k)===null)localStorage.setItem(k,JSON.stringify(s[k]))}catch(e){}})}
 function get(k){try{const v=JSON.parse(localStorage.getItem(k));if(Array.isArray(v))return v}catch(e){}return []}
-function put(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){toast('Gagal menyimpan. Penyimpanan browser penuh atau diblokir.');return false}}
+function put(k,v){try{localStorage.setItem(k,JSON.stringify(v));if(k!==K.o)pushContent(k,v);return true}catch(e){toast('Gagal menyimpan. Penyimpanan browser penuh atau diblokir.');return false}}
 /* ---------- SUPABASE: pesanan dibaca dan ditulis ke server ---------- */
 const SB_URL='https://qtiwgwoyvpaotjysfdgq.supabase.co/rest/v1/orders',SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF0aXdnd295dnBhb3RqeXNmZGdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU2NTMyOTMsImV4cCI6MjExMTIyOTI5M30.hqZh_c0bWcNyo2e4pGF-S39GAZ_LM7xQrTCrIjjUrIw';
 const SB_H={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json'};
 async function pushOrders(list,merge){try{const r=await fetch(SB_URL,{method:'POST',headers:{...SB_H,Prefer:'return=minimal'+(merge?',resolution=merge-duplicates':'')},body:JSON.stringify(list.map(o=>({id:o.id,data:o})))});return r.ok}catch(e){return false}}
+const CT_URL='https://qtiwgwoyvpaotjysfdgq.supabase.co/rest/v1/content',CT_KEYS=[K.p,K.f,K.r];
+async function pushContent(k,v){try{const r=await fetch(CT_URL,{method:'POST',headers:{...SB_H,Prefer:'return=minimal,resolution=merge-duplicates'},body:JSON.stringify({key:k,data:v,updated_at:new Date().toISOString()})});if(!r.ok)toast('Perubahan belum tersimpan di server (HTTP '+r.status+').');return r.ok}catch(e){toast('Perubahan belum tersimpan di server.');return false}}
+async function pullContent(){try{const r=await fetch(CT_URL+'?select=key,data',{headers:SB_H});if(!r.ok)return;const rows=await r.json();let ch=false;
+ CT_KEYS.forEach(k=>{const row=rows.find(x=>x.key===k);if(!row){pushContent(k,get(k));return}const s=JSON.stringify(row.data);if(s!==localStorage.getItem(k)){localStorage.setItem(k,s);ch=true}});
+ if(ch&&!$('app').classList.contains('hidden')&&!$('dr').classList.contains('open')&&!$('md').classList.contains('open'))render()}catch(e){}}
 let pulled=false;
 function stat(ok,m){const e=document.getElementById('sbStat');if(!e)return;e.textContent='Server pesanan (v2): '+m;e.className='text-xs font-semibold px-2 py-1 rounded-lg break-words '+(ok?'bg-emerald-50 text-emerald-800':'bg-red-50 text-red-700')}
 async function pullOrders(){
@@ -229,7 +234,7 @@ $('q').oninput=e=>{S.q=e.target.value.trim().toLowerCase();if(S.v!=='orders'){S.
 $('bell').onclick=()=>{S.v='orders';S.f='Baru Bayar';render()};
 $('manual').onclick=$('manual2').onclick=manualModal;
 $('reset').onclick=()=>{modal(`<h2 class="fd font-bold text-xl">Reset data demo?</h2><p class="text-sm text-slate-600 mt-2">Pesanan, produk, portofolio, dan ulasan kembali ke data awal. Web utama ikut berubah karena memakai data yang sama.</p><div class="flex gap-2 justify-end mt-5"><button class="btn b2" onclick="closeModal()">Batal</button><button class="btn b1" onclick="doReset()">Reset sekarang</button></div>`)};
-function doReset(){seed(true);pushOrders(get(K.o),true);closeModal();S.lastN=get(K.o).length;render();toast('Data demo dikembalikan ke awal.')}
+function doReset(){seed(true);pushOrders(get(K.o),true);CT_KEYS.forEach(k=>pushContent(k,get(k)));closeModal();S.lastN=get(K.o).length;render();toast('Data demo dikembalikan ke awal.')}
 
 /* ---------- Overlay helpers ---------- */
 let lastF=null;
@@ -375,7 +380,7 @@ window.addEventListener('storage',e=>{
 seed(false);
 tailwind.config={theme:{extend:{}}};
 icons();
-pullOrders();setInterval(()=>{if(!document.hidden)pullOrders()},5000);
+pullOrders();pullContent();setInterval(()=>{if(!document.hidden){pullOrders();pullContent()}},5000);
 try{if(sessionStorage.getItem(AUTH)==='true')showApp()}catch(e){}
 </script>
 </body>
